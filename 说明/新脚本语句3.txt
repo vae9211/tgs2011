@@ -1,9 +1,0 @@
-DeLoadFile(lua脚本,解密dll名字,解密key);  --如果加密dll和加密key为空 就是用tgs内部解密
-
-callfunc(SelfP, SenderP, aStr);   //千年脚本转换下 例如 local aStr = callfunc(NpcP, PlayP, 'getname'); 获取角色名字
-                         aStr 是千年脚本的callfunc 后面内容 
-print(SelfP, SenderP, aStr);   //千年脚本转换下 print(NpcP, PlayP, 'say npc说话了 100'); 没返回 直接调用命令
-                      aStr 是千年脚本的print 后面内容 
-
-GetNewPlayId(); 返回新的角色id， 此id获取之后将标注为已使用 不再被获取到
-GetNewItemId(); 返回新的物品id， 此id获取之后将标注为已使用 不再被获取到

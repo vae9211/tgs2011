@@ -1,7 +1,0 @@
-强化物品属性的
-
-找个NPC在 NpcSetting里面 对应名字的 notice设定为10000+luascriptlist.sdb里面索引序号
-
-其他的参考脚本 强化管理员
-
-强化物品不支持寄卖
