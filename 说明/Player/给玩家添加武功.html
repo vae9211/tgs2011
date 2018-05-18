@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>给玩家添加武功</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>给玩家添加武功</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Player.AddMagicByIndex(PlayP, 武功名字, 武功等级, 武功页面);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp; 返回布尔判断是否添加成功 武功面板ID索引  0 武功 1 上层 2 掌风 3 三层 <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+&nbsp;&nbsp;local BoAdd = Player.AddMagicByIndex(PlayP, '无影脚', 9999, 0)<br>
+&nbsp;&nbsp;if BoAdd then
+&nbsp;&nbsp;  添加成功
+&nbsp;&nbsp;else
+&nbsp;&nbsp;  添加失败
+&nbsp;&nbsp;end
+</body>
+
+</html>

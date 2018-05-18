@@ -967,7 +967,7 @@
     * 增加读写sdb语句到lua，增加lua直接操作门武sdb的语句
         + Manager.GetSdbInfo(sdb文件名字, 索引名字, 字段) 返回对应字段的值
         + Manager.SetSdbInfo(sdb文件名字, 索引名字, 字段, 字段值) 无返回
-        + Manager.DelNameInSdb(sdb文件名字, 索引名字)  用于删除sdb里面不需要记录的玩家名字
+        + Manager.DelNameInSdb(sdb文件名字, 索引名字)  用于删除sdb里面不需要的记录
         + Manager.GetGuildSdbInfo(门武名字,sdb字段名字) 返回字符串
         + Manager.SetGuildSdbInfo(门武名字,sdb字段名字,字段设定字符串)
     * 增加直接增加武功到指定武功页面语句Player.AddMagicByIndex(武功名字, 武功等级, 武功页面) 返回布尔类型 true 或者 false
@@ -1030,4 +1030,4 @@
 
 .. attention ::
     * 注：更新功能来自 网友建议和意见, 太极插件参考。
-    * 如果想隐藏脚本实现细节，参考太极那样,可以用luac.exe生成预编译的。就没法看到写的细节了。
+    * 如果想隐藏脚本实现细节,可以参考太极那样用luac.exe生成预编译的。

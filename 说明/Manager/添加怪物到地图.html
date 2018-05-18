@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>添加怪物到地图</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>添加怪物到地图</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Manager.AddMonsterToMap(MapId, MonsterName, X, Y, W, ScriptIndex, true);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp;返回为 == 0就是失败 参数 true表示死亡会刷新 W是刷的范围 ScriptIndex是脚本索引编号  <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+<META>
+&nbsp;&nbsp;if Manager.AddMonsterToMap(0, '鹿', 120, 120, 5, 10098, true) == 0 then<br>
+&nbsp;&nbsp;  添加怪物失败
+&nbsp;&nbsp;end;
+</META>
+</body>
+
+</html>

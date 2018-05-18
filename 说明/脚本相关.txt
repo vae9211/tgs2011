@@ -1,0 +1,52 @@
+
+---------脚本callfunc------------
+callfunc
+
+putsendermagicitem 支持物品 名字:数量:段数:黄字
+setsendermagicskilllevel 武功名字 等级         返回 false or true
+getsendermagicskilllevel 武功名字              返回的等级
+getsendermonstername 无参数                    返回变身名字 没变身就是空
+
+getsenderwearitemname 身上位置                 返回对应装备名字  9 武器 8 帽子 7 头发 6 外套 4 内裤 3 鞋子 2内衣 1 护腕
+getsdbinfo sdb文件名字 索引值 字段名字          返回获取的字段字符 例: aStr := Callfunc('getsdbinfo .\tgsplus\magicadd.sdb 无影脚 damagebody')
+putsendermagic 武功名字 等级                    返回是false or true
+getsenderaccount                               返回帐号
+getsenderexpnum                                返回经验倍数
+getsenderexptick                                返回经验倍数剩余时间
+  
+getsenderitemaddgradebyindex 装备栏索引       返回装备栏指定格子装备额外等级
+setsenderequipattribbyindex 装备栏索引 属性1 属性2 属性3 属性4 设定装备栏装备额外属性加成 返回'false' or 'true'
+--------脚本 print--------------
+
+print('setsenderviewname 蒙面人');     //改变对象显示名字
+print('changesendertomonster 北方魔人');      //玩家变成北方魔人
+print('changesendertohuman');               //恢复原来模样
+
+print('setsdbinfo sdb文件名字 索引值 字段名字 填写的值'); //设定某sdb文件索引值对应的字段的值
+print('delsdbinfo sdb文件名字 索引值')           //删除某sdb文件索引值对应的所有信息
+
+print('setsenderexp 2 10000');               //设定玩家 2倍经验 10000秒
+
+print('changeguildmaxmember 门派名字 门派人数');  //设定门派人数上限
+
+------脚本函数-------------------
+===System.txt里面增加====
+
+procedure OnChangeWearItem(aStr: String);
+
+implementation
+
+
+procedure OnChangeWearItem (aStr : String);
+var
+  Str, Name : String;
+begin
+  //位置9是武器
+  Str := callfunc('getsenderwearitemname 9'); 
+  if Str = '太极斧' then
+  begin
+    print('setsenderviewname 蒙面人'); 
+    exit;
+  end;
+end;
+====end System.txt=============

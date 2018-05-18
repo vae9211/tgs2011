@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>添加物件到地图</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>添加物件到地图</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Manager.MapAddObjByName(MapId, Race, Param1, Param2, Param3, Param4, Param5, Param6);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp;参数MapId是地图编号 Race = 'Npc','Monster', 'Dynamicobject'<br>
+&nbsp;&nbsp;&nbsp;当为monster时 Param1..Param6参数分别是 名字,x,y,w,脚本索引,布尔值(true 或 false)表示是否死亡刷新<br>
+&nbsp;&nbsp;&nbsp;Npc时  Param1..Param6参数分别是 名字,x,y,w,脚本索引,bookname  --参考createnpcxx.sdb<br>
+&nbsp;&nbsp;&nbsp;Dyn时  Param1..Param4参数分别是 名字,x,y,脚本索引 param5,param6无参数 <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+<META>
+
+&nbsp;&nbsp;Manager.MapAddObjByName(1, 'Npc', '老板娘', 500, 500, 10, 10020, '老板娘.sdb')<br>
+</META>
+</body>
+
+</html>

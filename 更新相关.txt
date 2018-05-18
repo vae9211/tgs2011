@@ -1,0 +1,671 @@
+此基础端主要是示范脚本 不适合直接娱乐(武功无法学习请调整对应字段)
+  
+一些功能的操作流程 http://hi.baidu.com/new/qntgs2011
+
+★
+关键注意点：在所有ini文件里面  如下配置会失败
+[setting]
+MultiExp= 100  //xxxx    <-错误
+
+上面这种写法 会被服务器强制认为赋值1 因为不合法
+[setting]
+MultiExp= 100            <-正确
+★
+付费功能相关
+1,提供玩家在线改名功能,需要支付费用绑定机器 (私密群主,群主不主动私密)
+
+百度网盘下载地址  http://pan.baidu.com/share/home?uk=3626174999
+
+
+tgs2011 无任何限制，随意使用传播。
+2018.04.28
+   1，优化版本,增加走路不加密
+2018.03.12
+   1, Player.lua 增加
+      function OnUserHit(PlayP, HitdP, ...)
+
+      end
+
+2018.01.16
+   1，Player.lua 增加 
+      function OnSysTime() --无参数 适合地图提示 其他一些反复事件
+      end
+      --下面这个属于一次性定时功能
+      PlayerList.SetEventTick(索引,时间(100=1秒),提示文字) 
+      对应触发语句 
+      function OnSysEventTick(...) arg[1]是索引 arg[2] 是提示文字
+      end
+
+2018.01.11
+   1，修复Player.lua拥有 OnGetResult 导致老脚本的OnGetResult可能引起的无法触发
+2018.01.04
+   1，服务器对调用的脚本函数增加保护
+   2，提供玩家在线改名功能,需要支付费用绑定机器 (私密群主,群主不主动私密)
+2017.12.26
+   1，修改log文件跟随执行文件同名
+   2，修复script脚本扣除装备时,扣除失败问题
+2017.12.12
+   1, 修复三层的bug
+   2, 修复心法不起bug
+2017.12.04
+   1，脚本获取的ItemData增加Grade字段
+   2，去除上个版本攻击缓慢
+   3，增加关闭tgs时 自动调用菜单File->close 命令,尽量避免直接关闭导致的数据丢失可能
+   4，调整HookCallFunc对OnUserSay的调用,函数末尾 请使用 return 请勿使用 return 'true' 避免其他调用部分失败
+   5，菜单增加赞助,此项随用,有兴趣的可以支持！
+2017.11.25
+   1，调整OnItemInfoShow 相关
+2017.10.18
+   1，调整攻击转身去除防闪打功能 还原原始设定
+   2，修改脚本设定0团队问题
+2017.09.20
+   1，修正关闭tgs时 玩家在线会弹错，正常关闭推荐 菜单 File->Exit
+2017.09.19
+   1，修改luascriptlist.sdb 不再强制要求顺序编号，只要编号不重复就ok，脚本编号依然是 10000 + 编号
+   2，增加在线数据功能
+          当玩家进入游戏,服务器将存档一份在内存,如果勾选在线数据，玩家离线再登录，
+          将调用内存数据，避免玩家用DB存档间歇，登录角色读取的非最后数据引起的物品回档
+      ps 勾选了在线数据 修改DB的角色数据将无效
+   3，修复之前大量角色掉线，服务器数据卡死问题
+   4，N版本之前的门主不在线 门石掉血问题 早已修复，不算本次更新
+2017.09.12
+   1，调整Player.SetEventTick(PlayP, aIndex, 时间间隔, aTips) 增加文字传入
+   2，调整Player.lua function OnEventTick(PlayP, aIndex, aTips) 增加 aTips参数 可以通过 aTips实现Npc脚本和Player互通
+
+2017.05.22
+   1，修复上个版本的一个数据保存缺陷
+   2，Npc.sdb 增加字段 Guild,Groupkey 请自行增加，功能参考monster.sdb
+2016.12.15
+   1，普通攻击武功支持Function 功能<1 2 3 4 5> 但是只有4和5时 MinRange 有效
+      1 还生模式 2 灵动八方 3 风灵旋 4 灵动增强版<MinRange有效> 5 打击一条线模式<MinRange有效>
+2016.12.07
+   1，增加语句 @重载脚本  主要用于脚本编写测试
+      修改luascriptlist.sdb 增加或修改信息 使用此语句即时生效 
+2016.10.24
+   1，修复小地图显示问题
+2016.06.22
+   1，增加脚本语句 Player.SetEventTick(PlayP, 时序编号, 间隔时间(100=1秒)) 
+      当时间小于等于0时 从服务器取消此时序编号
+      ps: 当间隔时间倒计时为0之后,触发OnEventTick 同时此时序编号消失 需要重新设定 
+  2, Player.lua 增加
+      function OnEventTick(PlayerP, ...)
+
+      end
+      arg[1] =时序编号 当触发这里时 表示 SetEventTick 已经完成时间倒计时
+2016.05.28
+   1，修复门石掉血问题
+   2, 调整新建门派血量 不在超出1100000
+2016.05.12
+   1，修复门武申请 取消门武会卡住问题
+2016.04.16
+   1，修复04.01版本bug
+2016.04.01
+   1, 脚本 TeamManager 系列生效。
+2016.03.26
+   1, 增加local GetNum = Player.GetStatePoint(PlayP) 获取玩家真气值
+      增加Player.SetStatePoint(PlayP, GetNum + 1) 设定玩家真气值（不是叠加 就是改变成当前值）
+2016.02.24
+   1，调整优化物品多货币
+2016.02.05
+   1，增加NPC买卖物品 多种货币
+      Item.sdb 增加字段 SellCoin, BuyCoin
+      
+      为空 默认游戏钱币 填写存在的物品名字 购买就需要对应的物品
+2016.01.08
+   1，增加界面发送信息，文件名为 GMSay.txt 与tgs同目录
+      喊话在屏幕中央
+   2，修正 Player.SetPowerLevel点击玩家境界不同步问题
+2016.01.02
+   1，修正头防显示问题
+2016.01.01
+   1，修正戒指活力设定过高引发三防无法满值问题
+   2, 修正Npc.AddPlayToGuild
+   3, 当活力超过655.35时 服务器只传递655.35给客户端 避免客户端显示错乱
+      客户端默认显示只支持655.35 超过就错乱
+   
+2015.12.17
+   1，取消 Player.SetAddAttrib 对三防的额外添加，避免一些特殊问题
+
+2015.12.03
+   1，调整Player.GetMagicSkill 支持三层武功 但是不支持查询三层武功等级
+2015.11.19
+   1, 修复10.30更新出现的bug
+2015.10.30
+   1，Player.lua 增加 新用户登录拦截
+      function OnNewUserLogin(PlayP, ...)
+   2，增加语句
+      Player.SetUserNewId(PlayP, 某整数值) 修改玩家id 整数值不支持负数
+
+2015.10.17
+   1，修复门武部分信息不保存问题
+   2，Player.lua 增加门派创建拦截
+      function OnMakeGuild(PlayP,...)  ---arg[1] =玩家名字, arg[2] =门派名字
+
+      return '' 表示创建门派继续 否则返回的字符将被门派提示出来作为创建门派失败的原因
+
+2015.05.26
+   1, 调整物品交易记录信息, 提供相关解析工具。
+   2，优化 @show xxx 命令 
+2015.04.03
+   1, 调整支持 tgs2011.acs 提示字符可以被调整了
+2015.03.17
+   1, 修复 Player.SetAddAttribData 
+2015.03.05
+   1, 恢复调用lua51 文件夹的5.3的dll 请删除
+2015.03.01
+   1, 调整真气三段
+     Game.ini
+     [setting]
+      真气1=1
+      真气2=2
+      真气3=3
+   2, 招式使用卡状态问题修复。
+   3, 调整lua 支持5.3 对应脚本需要调整
+     (1): 默认的语句带有...的原始直接用arg参数
+          需修在函数语句下增加一句 
+          local arg = {...}  
+     (2): table.getn(xx) 全部需要改成 #xx
+     (3): 其他语句问题 请参考tgs1000.log
+   4, lua调用的第三方dll都需要同步到lua 5.3版
+     正常不调用
+
+2014.12.25
+   1, 添加爆率修改界面
+
+2014.12.18
+   1, 修复Sql.GetTabSql()
+     local GetTab = Sql.GetTabSql('select * from NewPlay');
+     for k, v in pairs(GetTab) do
+       if type(v) == 'table' then
+       for k1, v1 in pairs(v) do
+         Player.SendChatMsg(PlayerP, k1..'->'..v1, 2);
+       end
+     end
+   end;
+2014.10.06
+   1, 调整真气获取功能
+
+2014.07.31
+   1，调整 Player.DelMagicItem(PlayerP, '生药:100', true); 
+      --如果第三个参数是 true 就不考虑段数和黄字相同 直接判断物品名字和数量
+      
+   2, BasicObj.GetAllPlayP();
+      返回玩家列表 
+      例子
+      local AllPlayTab = BasicObj.GetAllPlayP();
+      AllPlayTab = {['角色名字']=角色P, }    角色P指类似 PlayerP 这类
+   
+2014.06.23
+   1, 修正当地图编号超出255， 玩家下线再上地图编号错误问题。
+2014.04.01
+   1, 增加 function OnChangeMagic(PlayP, ...)
+   2, 调整招式特效持续时间
+2014.02.28
+   1, 调整招式武功特效问题
+2013.12.18
+   1, 增加支出Npc爆出公告
+   2, 调整兼容360软件
+2013.12.17
+   1, help文件夹支持子目录
+2013.12.16
+   1, 调整地图时间超出1小时的提示错误
+ 
+2013.11.15
+   1, 修复版本系列武功满就出错问题
+   2, 修复套装回血问题
+2013.09.17
+   1, 增加脚本语句 function OnPickUpItem(PlayP, CharName, ItemData)
+                   Player.SendARoundChatMsg(PlayP, CharName..' 测试消息 '..ItemData.Name, 31, 32767); --发周围信息
+     
+      当玩家拾取物品时 就会显示这个 
+      function OnPickUpItem(PlayP, CharName, ItemData)
+        Player.SendChatMsg(PlayP, CharName..ItemData.Name, 2);
+        Player.SendARoundChatMsg(PlayP, CharName..' 测试消息 '..ItemData.Name, 31, 32767); --发周围信息
+      end;
+2013.08.12
+   1, 增加脚本语句 Player.GetAreaName(PlayP); //返回字符串
+2013.08.06
+   1, 修复Player.Say脚本语句
+2013.07.28
+   1, 修复wpe发某数据包，服务器加速检测失效bug
+
+2013.07.27
+   1, 增加月卡模式 
+     (1) game.ini 
+         [setting]
+         月卡模式=1
+
+     (2) 增加脚本语句 
+        Player.GetPlayInfo(PlayP);  //返回当前时间类型数字 和 时间字符串
+        Player.SetPlayInfo(PlayP, 时间类型, 分钟);  类型有 (0: 免费; 1: 3天体验, 2: 付费, 3: 试玩时间， 4：无时间); 
+
+     (3) 示范模式
+       Player.lua
+     
+       function OnUserStart(PlayerP)
+       --检查玩家游戏时间
+         local PayType, PayTime = Player.GetPlayInfo(PlayerP);
+         if PayType == 4 then  --玩家无时间 就给5分钟试玩时间
+           Player.SetPlayInfo(PlayerP, 3, 5); --给玩家增加试玩时间 5分钟  3->试玩, 5->单位分钟
+         end;
+       end;
+
+       function OnUserSay(PlayerP, ...)
+         if arg[1] == '@充值' then
+           --检查玩家游戏时间
+           Player.SetPlayInfo(PlayerP, 2, 30 * 24 * 60); --给玩家增加游戏世界 2是游戏时间 30 * 24 * 60 是30天
+           return 'true'
+         end; 
+       end;
+   2, 修复月卡上线无法判断时间问题
+    
+2013.07.26
+   1, 修复采药，采矿无法采集问题。
+2013.07.13
+   1, game.ini  //增加默认上线开启双倍功能
+      [setting]
+      开启双倍 = 1 
+   2, 修复获取双倍经验 有时间 但是开启双倍没时间的bug
+   3, 对Player.SetAddAttribData进行调整 增加防溢出处理，
+      避免设定过大导致服务器处理错误
+      ( 
+       默认索引从0开始 不要跨数值设定，否则会引发异常
+       如果有设定部分，没有加成时请给玩家设定0 不要跳过设定
+      )
+2013.06.25
+   1, 修正北海冰玉清洗装备id变更问题
+   2, 修正脚本删除武功无法删除掌风栏问题
+2013.06.12
+   1, 修正服务器错误时 提示'%d' 不能正确写错误到tgs1000.log
+2013.06.11
+   1, Player.Say(PlayP, 'test');
+2013.06.09
+   1, 修改一个服务器踢玩家断线可能引发爆机问题。
+   2, 开放http的功能，不再需要注册。
+2013.04.25
+   1, 根据www.lanlong.net提供的隐身方案，服务器针对性屏蔽
+2013.04.12
+   1, 更新解决一个可能致命的bug
+2013.04.06
+   1, 增加界面勾选按钮相<门战时 无门派玩家不可以攻击门石> 此配置不保存
+2013.04.03
+   1, 调整判断为加速时 定身时间 单位10毫秒
+      Geme.Ini
+      [SETTING]
+      加速定身=1
+2013.03.25 
+   1, 修正Player.GetItemPassWord 获取信息不正确问题
+   2, GetMagicSkillLevel 支持查看掌风等级
+2013.03.13
+   1, 修改lua脚本返回值判断，如果脚本执行出现错误，则返回值为空。
+      同时写错误信息到 tgs1000.log 错误信息包含调用的语句名字比如 OnClick 错误信息
+   2, 增加调整玩家境界语句 Player.SetPowerLevel(PlayP, 境界数字)
+      如果境界数字小于0 就设定为0境界 大于最大境界就设定为最大境界
+      
+2013.03.06
+   1, 修正变身不能点击带脚本的物品
+2013.03.04
+   1, 修改未建门门石 门石拥有者或gm可以拾取
+2013.03.02
+   1, 修改交易提示，从原始名字改成显示名字
+2013.02.28
+   1, 修复OnDropItem的bug 
+2013.02.26
+   1, 更新脚本语句DeleteMagicByName 支持删除3层护体和武功
+     增加 Player.AddAdaptive(PlayP, 10000); 增加耐性
+     增加 Player.AddVirtue(PlayP, 10000); 增加浩然
+     
+2013.01.22  
+   1, 增加跨服喊话配置
+     sv1000.ini
+     [UDP_CROSSSAY]
+     PORT=4560
+     IPADDRESS=127.0.0.1
+     LOCALPORT=1599
+  2, 增加跨服喊话转发程序
+     端口配置见默认生成的ini     
+  3, 脚本参考Player.lua 和 跨服喊话.lua
+  4, 脚本语句
+     Manager.CrossServerSay(前景色,背景色,发送内容); //返回布尔类型  跨服喊话  
+2013.01.20
+   1, 更新http参数获取问题 
+2013.01.19 sp1
+   1, 修正未开通http服务器时 程序报错问题 
+   2, 修正更新相关里面的错误描述
+2013.01.19
+   1, 根据太极版本测试出现的问题
+     (1) 服务器对传入的 NpcP, PlayP之类增加了校验。如果错误将执行语句
+     (2) 在怪物部分 如果接触参数传输，比如PlayP 先对PlayP进行 
+         if PlayP ~= nil and BasicObj.GetRace(PlayP) == 1 then
+	   Player.SendChatMsg(PlayP, '测试', 2);
+	 end;
+	 以上判断可以有效减少一些意外发生。 当然 NpcP MonsterP 都可以类似判断。
+	 服务器做检测 但是不要太依赖。
+     (3) 不改动脚本情况下 当前太极版本的机关闸门脚本刷怪将正常了。
+         原始是触发了怪物的 OnDie 传入的PlayP 不是玩家引发后续的Player.SendChat(PlayP, 'xxx', 2) 引发地址报错 导致无法刷怪 
+ 
+2013.01.18 sp1
+   1, 修正Post传入的字符长度错乱
+   2, 调整http防御 参考说明文档里面  http功能相关.txt
+2013.01.18  <注册才可以使用http功能>
+   1, 新增http访问支持 (TGS使用此功能就要注册，不使用不注册)
+    （1）想使用此功能的继续下面操作，否则无视
+
+     (2) 运行机器码程序 获取值 发给我， 我返回 serial.txt  (非付费)
+         放入到tgs目录
+
+     (3) sv1000.ini  配置端口 如果端口为-1或者不增加此字段 Http支持功能不开启
+         [server]
+         HTTPPort = 8080           
+     (4) NewScript目录web.lua 为http访问时的脚本调用
+         function OnWebInfo(...)
+           arg[1]  arg[1]是GET时 http://127.0.0.1/xxxx 中 /xxxx的内容  arg[1]是post时 参考附带的login.html中的 'post'
+           arg[2]  网页获取模式 比如 'GET', 'POST'
+	   arg[3]  访问的IP
+           return xxx   --xxx信息是返回给网页显示的内容 具体百度html格式 
+         end;
+      
+     (5) 重读web脚本命令  @scriptload web 
+        
+2013.01.14
+   1, 新增脚本语句
+     GetNewPlayId(); 返回新的角色id， 此id获取之后将标注为已使用 不再被获取到
+     GetNewItemId(); 返回新的物品id， 此id获取之后将标注为已使用 不再被获取到
+   2,修改function OnDropItem(PlayerP, MonsterName, ItemData) 
+     支持返回值 return ItemData 支持获取ItemId,BoAddAttrib,count,UpGrade,AddType
+
+2013.01.12
+   1, Game.ini 新增 'SETTING', '二层学习浩然值', 数字
+2013.01.01
+   1, 增加2句脚本 
+     (1), callfunc(SelfP, SenderP, aStr);   //千年脚本转换下 callfunc(NpcP, PlayP, 'getname'); 获取角色名字
+     (2), print(SelfP, SenderP, aStr);   //千年脚本转换下 print(NpcP, PlayP, 'say npc说话了 100'); 没返回 直接调用命令
+
+2012.12.30
+   1, PlayerList.GetUserPointerById(PlayP); 返回值只有1个的问题
+2012.12.26
+   1, Player.GetAdaptive(PlayP); 返回数字 获取耐性
+             GetVirtue(PlayP); 返回数字 获取浩然  
+2012.12.24
+   1, Player.AddMagicByIndex 调整为不判断武功学习条件
+2012.12.22
+   1, 修改招式升级支持到30级。
+   2, NeedStatePoint.sdb 升级需要的真气为0时 就不能升级 通过此值控制最高多少级别
+2012.12.18
+   1, 修正结盟问题。
+2012.11.30
+   1, 修复BasicObj.GetCurLife 和GetMaxLife 现在获取到怪物血
+   2，增加BasicObj.ChangeLife 例如 BasicObj.ChangeLife(BasicP, -1000); 这就是减少10.00血
+   3, 不再拦截窗口打开说话问题
+   4, 取消压缩包里面的mdb查看工具，需要的自行百度
+   5, 修改Player.AddMagicAndLevel() 为直接添加武功 不再经过判断
+2012.11.16
+   1, 修改@read命令 调整为
+     @read all   = 原始@read
+     @read sysop = 重读sysop.sdb
+     @read item  = 重读item.sdb文件
+     @read mop   = 重读monster.sdb  适合即时调整怪物名字属性和暴率  
+     @read npc   = 重读npc.sdb
+     @read map   = 刷新地图所有目标 重置地图各种目标
+  
+2012.11.09
+   1，界面增加跨服连接提示信息
+   2, 修正跨服一些bug
+2012.11.08
+   1, 修复MDB路径<不需要特殊使用的不用设定>
+   2, 增加服务器配置设定
+      Sv1000.ini 
+      [Server]
+      服务器名=测试
+   3, 默认了Sv1000.ini [BATTLE_SERVER]的IPADDR 用于测试跨服
+   4, 跨服口令 @参加对战   退出跨服 @退出对战   <暂不提供跨服程序>
+
+2012.11.07
+   1, 调整任逍遥提出的擂台问题。
+   2, 
+      新增 <不设定就是用系统默认>
+      Game.ini
+      [Setting]
+      MDB = .\mdb\ItemAddAttrib.mdb
+
+   3, 调整界面下方色彩显示
+   4, 修正九尾狐母兑换玫瑰时，红玫瑰不收取问题
+
+2012.11.02
+   修正门派武功脚本修改成2层时 添加武功错误问题
+2012.10.31
+   修改界面提示   
+
+   增加脚本
+       Player.LockExchange(PlayP, true); --如果设定玩家将无法交易和扔物品
+   门派
+       扔门石周围需要有6个空位
+   
+
+2012.10.08 sp1
+   增加Game.ini 
+   [Setting]
+   查看装备= 1 //1显示 0关闭
+
+2012.10.08
+   调整物品编号显示方式,调整查看装备为Alt + 鼠标双击 
+   game.ini 
+   配置物品编号小于1 点击查看物品就不再显示(物品编号依然存在)
+
+   自定义物品编号方法 
+     1: game.ini 配置 物品ID起始值 = xxx
+     2: 删除存在的ItemId.dat 
+     3: 运行tgs2011.exe 会生成ItemId.dat
+     4: 修改 game.ini 的 物品ID起始值 = xxx  (xxx<=0 服务器物品信息不显示 编号信息)
+     5: 收工。 老区只要操作第4步，准备开的区重复第1步->第4步
+    
+   
+2012.9.27
+   调整加壳对神武脚本的保护。
+2012.8.26
+   修改福袋提示信息，更准确查找原因
+2012.8.25
+   灭门 门武问题
+2012.8.20
+   调整改样的 sdb字段
+   调整 门派团队语句的参数  @门派团队 9999
+   sp1:
+   增加脚本语句  Player.SendCenterMsg(PlayP, aStr); //玩家单体屏幕中间消息
+   
+   调整门派删除问题
+2012.8.18
+   调整改样的 color字段为 kind 取消原来的 color
+ 2012.8.12
+   修复Dio提出的技能框不保存强化属性问题
+
+   sp1更新：
+   修正玩家暂停双倍时 脚本获取双倍信息错误
+   sp2更新
+   修正DeLoadFile的dll真正读取
+2012.8.8
+   调整灭门脚本位置 传递的P是最后打破门石的玩家
+   增加删除门派脚本 Manager.DeleteGuild(门派名字); --GM删除门派,脚本灭门不再提示 需要自己添加提示
+2012.8.7
+   更新脚本加密方案，支持脚本绑定机器。
+   加密示范 参考 呐喊系统部分（Player.lua, 呐喊系统.lua)
+2012.8.6 sp1
+   针对呐喊脚本调整设定
+2012.8.6
+   修正 SetAddLifeData存在的数据错误  <Dio 发现>
+   
+2012.8.4
+   增加脚本加密功能，压缩包示范请看 
+   LuaScriptList.Sdb 的第二条 
+   加密内容类似目录  '1\老板娘.txt';
+   
+   带示范测试工具 
+2012.8.2
+   修正脚本返回值没获取。
+   调整脚本语句 Npc.ShowTradeWindow(NpcP, PlayP, iIndex, 交易货币类型); //如果交易货币不填就是默认的 Game.ini里面的 Ini_Gold
+2012.7.29
+   调整步伐经验，修改每次增加经验值最大值
+2012.7.28
+   增加百度计数 地址 http://hi.baidu.com/qntgs2011/item/34b4a897c9ca0513336eeb28
+   BasicObj.SetGroupKey(ObjP, 团队id); //改变团队 仅支持玩家和怪物
+   调整GM删除门派相关
+   @门派团队 xxx   可以设定设定者可见范围内的同门派玩家团队(门主和副门可用)
+   调整步伐经验值到secmutilexp
+2012.7.24
+   增加玩家命令 @开启双倍 @停止双倍 默认上线时不开启双倍
+   修复删除地图怪物时名字被修改情况下删除失败问题！
+
+2012.7.23
+   增加脚本语句  BasicObj.ChangeObjectName(ObjP, 名字) 改变目标名字 
+
+2012.7.17
+   修改 @擂台 物品数量为0 产生的bug
+   增加 新建玩家 分配新手物品脚本(Dio 囧 提供)
+2012.7.14 
+   修改经验倍数与神武奇章不一致的问题。
+2012.7.2
+   放宽加速检测的严格程度.(由一次就重新定位 修正为连续2次超速重新定位)
+   修正变身恢复时立刻复活问题
+2012.6.30
+   增加禁止变态加速的设置(参考图和界面)
+2012.6.29
+   增加语句 Manager.ScriptOpenGuildWar(是否战争); //参数是布尔值 true or false  没返回值
+
+
+2012.6.28
+   增加语句 Player.SendSideMsg(PlayP, aStr);
+   
+   太极版本是<Dio 囧>辛苦的成果。 非常感谢
+          
+2012.6.13
+   停止对战场功能。（脚本实现更灵活）
+   增加角色属性功能 
+   Player.SetAddAttribData(PlayerP, 0, AttribTab);//无返回  AttribTab = {Energy = 0,      InPower = 0, OutPower = 0, Magic = 0, Life = 1000};
+
+2012.6.11
+   增加辅助武功 武功类别 4
+   此武功是攻击八方向 MinRange 值内的玩家
+   距离越远，伤害越低
+
+2012.6.10
+   Manager.SetGuildMemerMaxCount(门派名字，最大人数)
+   整合Dio囧提供的门派等级
+2012.6.9
+   增加语句
+   Manager.SetMonsterWeakByMapId(地图索引, 百分比); //无返回 百分比大于100就是增加 小于100就是减弱
+
+
+2012.6.8
+   调整mdb强化属性表 采用Itemid获取信息
+    
+   增加 Dio 囧 2个新活动（结婚和 称号)
+   
+   提供简易DB离线修改器程序
+
+2012.6.7
+   1. 添加擂台战持续时间
+     Game.ini
+     [Setting]
+     擂台战斗时间 = 3      //3表示3分钟 
+   
+   2.增加擂台对战和战场客户端上部血条显示. 
+   
+   3. 增加 player.lua里面 function OnChallengeOver(PlayP, ChallengeP, aStr);
+2012.6.6
+    镜像地图之后，各类NPC，monster，dyn纷纷要求一同镜像。
+    对于广大众的合理需要，此次加入镜像地图时，同时镜像地图上非玩家部分。
+    
+    同时福袋运营上提示说强化物品取出时，鉴定商没有同步鉴定强化属性。
+    鉴定商纷纷表示 这个问题不存在，你信不信我不知道，反正我信了。
+
+
+    脚本function OnDropItem(PlayP, 怪物名字) 如果没有 return 'true' 就调用 MonsterDropItem.SDB设定
+
+      
+2012.6.5
+    调整 对战场脚本 增加地图镜像功能～（可以设定一个地图做模板，创建N个一样的）
+    增加门派被灭脚本触发
+    function OnGuildOver(P, aStr); aStr 是门派名字
+
+    @移动 地图ID或地图名字 x  y  增加支持地图ID移动
+
+    调整套装字段为 Item.Sdb的 EquipSet 字符串 原始的在其他地方有很多被使用。
+    
+    搜索 EquipSet  在套装系统可以获得参考
+    
+    添加套装特效显示和关闭命令
+
+2012.6.4
+    调整 擂台 挑战者和擂主脱离视线时 挑战者自动传送到擂主身边 <Dio 囧 发现原规则漏洞>
+    
+    GM执行 @控制 xxx 不再影响被控制玩家动作
+    
+    增加部分脚本语句，增加千年Dota示范。
+2012.6.3
+    增加娱乐 擂台
+    修改怪物掉落MonsterDropSdb的TipStr
+    %1 代表玩家名字 %2怪物名字 %3段数 %4金字 %5物品名字
+
+2012.6.1
+    装备属性调整为MDB文件记录 每个装备当前可以附加15种属性
+
+2012.5.31
+    Manager.SendZoneEffectMessage(名字);//无返回
+2012.5.30
+    增加lua脚本语句
+    Manager.CheckAliveMonsterCount(地图ID, 种族类型, 名字); //返回数字
+	    CheckObjectAlive(地图标题, 种族类型, 对象名字); //返回布尔型 true or false //种族类型是字符 'MONSTER', 'NPC', 'DYNAMICOBJECT'
+
+2012.5.29
+    增加读写sdb语句到lua，增加lua直接操作门武sdb的语句，增加直接增加武功到指定武功页面语句
+    Manager.GetSdbInfo(sdb文件名字, 索引名字, 字段) //返回对应字段的值   local aStr = GetSdbInf('NewScript\\1.sdb', '测试帐号', '称号');
+            SetSdbInfo(sdb文件名字, 索引名字, 字段, 字段值) 无返回
+            DelNameInSdb(sdb文件名字, 索引名字);  //用于删除sdb里面不需要记录的玩家名字
+
+            GetGuildSdbInfo(门武名字,sdb字段名字); //返回字符串
+            SetGuildSdbInfo(门武名字,sdb字段名字,字段设定字符串);
+
+    Player.AddMagicByIndex(武功名字, 武功等级, 武功页面); //返回布尔类型 true 或者 false
+
+2012.4.28 
+    增加强化物品功能，示范里面的 <强化管理员.txt> 就是示范
+    直接指定到NPC身上就可以使用
+
+    如果不想使用强化功能，可以去除强化管理员脚本 或者luascriptlist.sdb里面不指定就OK
+2012.4.27 sp1
+    修复经验值设定无效问题
+2012.4.27
+    增加脚本语句 getsenditemaddattribbyname
+    修正不爆丹故障
+2012.4.19
+    增加门派总数 和门派人数限定。
+    增加脚本语句 print('changeguildmaxmember 门派名字 门派人数');  门派人数会修改成设定的数量 
+    添加手动命令 @查看门派成员
+2012.3.27
+    在脚本好友系统中添加部分新菜单（包含直接添加周围玩家为好友，
+    同步好友玩家<控制命令玩家版>)
+    
+    查看装备命令调整为 玩家客户端按住alt 点击其他玩家就显示
+2012.3.23
+    修改调整控制命令 如果 @控制 没角色名字 就放弃控制
+    修改武功丹脚本 支持修改三功和年龄(年龄不保存错误修复) 
+2012.3.12
+    Tgs2011更新功能GM可以查看任意玩家画面命令:
+    @控制 xxx    (xxx是玩家名字)
+2012.01.06
+    Tgs2011如果想发展还是需要各位提出各类有想法的需求以及发现的bug
+
+2011.12.30
+    经过不断更新,目前脚本功能已经增加到个人能实现的最大话
+通过目前的新脚本语句,可以实现套装,攻击特效,门主特效,等一系列内容
+门派类支持了门派武功创建时属性调整. 套装可以在 OnChangeWearItem
+里面判断实现
+    其他功能请参考新脚本语句功能.通过自己的想象实现相关功能吧,本
+年度更新到此为止.
+
+
+更新备注: 更新功能来自 网友建议和意见, 太极插件参考。
+          如果想隐藏脚本实现细节，参考太极那样, 
+          可以用luac.exe 生成预编译的。就没法看到写的细节了。
+
+
+

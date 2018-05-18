@@ -1,0 +1,220 @@
+//怪物调用脚本以下有效,其他调用无效
+Monster.GetName(MopP);    //P是函数参数里面 
+Monster.Say(MopP, SayStr, SayTick);    //间隔多久说某内容
+
+
+//Npc调用脚本以下有效,其他调用无效
+Npc.GetName(NpcP);    //P是函数参数里面 
+Npc.Say(NpcP, SayStr, SayTick);    //间隔多久说某内容
+Npc.ShowTradeWindow(NpcP, PlayP, iIndex);  //交易窗口 iIndex 是买卖之类的值
+
+
+//Manager
+Manager.GetRaceByP(PlayP);         //返回玩家种族 1玩家 3怪物 4NPC
+        RegenMapTickByIndex(MapId); //离开刷新MapId 地图 
+	DelMapMonsterByName(MapId, MonsterName);  //删除地图某名字的所有怪物 判断用 if Manager.DelMapMonsterByName(1, '太极公子') == true then 如果删除太极公子成功
+	AddMonsterToMap(MapId, MonsterName, X, Y, W, ScriptIndex, true); //返回为 == 0就是失败  true表示死亡会刷新 
+	GetMapRemainTickById(MapId);   //取得地图剩余时间 
+	MoveByServerId(MapId, TargetMapId, X, Y); //将某地图玩家送到其他地图的指定坐标
+        GetItemInfo(物品名字,物品数量,物品段数,物品黄字属性); //返回字符串
+        IsGuildSysOp(门派名字, 玩家名字); 返回1 表示门主 2表示副门 3 普通成员 0 不是门派成员或者门派不存在     
+	GetLevelByExp(Exp); 返回等级  exp指经验值
+	GetExpByLevel(Level); 返回经验值 level指等级
+        ChangeDynObjState(MapId, DynObjName, Boolean); //参数是 地图ID，动态物品名字，进退(true 或 false)
+	MapAddObjByName(MapId, Race, Param1, Param2, Param3, Param4, Param5, Param6); //参数MapId是地图编号 Race = 'Npc','Monster', 'Dynamicobject'
+	//当为monster时 Param1..Param6参数分别是 名字,x,y,w,脚本索引,布尔值(true 或 false)表示是否死亡刷新
+	//Npc时  Param1..Param6参数分别是 名字,x,y,w,脚本索引,bookname  --参考createnpcxx.sdb
+	//Dyn时  Param1..Param4参数分别是 名字,x,y,脚本索引 param5,param6无参数
+
+	CheckItemRegen(MapId,名字,x,y,w,数量); //w是刷的范围 MapId = 地图编号
+	SetAllowDelete(地图编号, 类别, 名字); //类别是 'Npc', 'Monster', 'Dynamicobject'   名字就是对应的名字
+        GetSdbInfo(sdb文件名字, 索引名字, 字段) //返回对应字段的值   local aStr = GetSdbInf('NewScript\\1.sdb', '测试帐号', '称号');
+        SetSdbInfo(sdb文件名字, 索引名字, 字段, 字段值) 无返回
+        DelNameInSdb(sdb文件名字, 索引名字);  //用于删除sdb里面不需要记录的玩家名字
+
+        GetGuildSdbInfo(门武名字,sdb字段名字); //返回字符串
+        SetGuildSdbInfo(门武名字,sdb字段名字,字段设定字符串);
+    //    CheckAliveMonsterCount(地图ID, 种族类型, 名字); //返回数字  调整到 BasicObj里面
+	CheckObjectAlive(地图标题, 种族类型, 对象名字); //返回布尔型 true or false //种族类型是字符 'MONSTER', 'NPC', 'DYNAMICOBJECT'
+        
+        SendZoneEffectMessage(名字);//无返回
+        SendSound(声音名字字符串, 地图编号数字); //无返回
+        CheckEnterMap(地图数字编号); //返回布尔类型  true 或者 false
+        GetDistance(OtherP, NewP);  //返回 数字 2个目标之间距离
+        
+	AddItemToMap(地图id,物品名字字符串,等级数字,金字数字,x,y,范围,数量)
+        Random(100); //返回随机值 整数
+
+	GetNewMap(地图名字, 新地图索引, 地图新名字); //返回布尔值  地图名字指Map.Sdb里面的名字 新地图索引必须是Map.sdb中没的 也没被创建过的 否则返回失败 
+	//GetNewMap如果有跳点 那么跳点目标地图的索引必须跟当前地图索引差值是一致的 比如 6生成1000 + 6 6原来跳转到7 那么对应的7必须也是 1000+7
+	//包含submap的索引
+
+        SetMonsterWeakByMapId(地图索引, 百分比); //无返回 百分比大于100就是增加 小于100就是减弱
+        SetGuildMemerMaxCount(门派名字, 最大人数);//无返回
+        ScriptOpenGuildWar(是否战争); //参数是布尔值 没返回值
+        DeleteGuild(门派名字); //无返回 删除门派功能
+
+        CrossServerSay(前景色,背景色,发送内容); //返回布尔类型  跨服喊话 
+//玩家信息
+Player.GetServerId(PlayP);  //返回玩家地图ID
+       GetCharId(PlayP);  //返回数字 获取玩家的ID
+       GetAccount(PlayP);  //返回帐号
+       GetMapName(PlayP);   //返回玩家地图名字
+       SendChatMsg(PlayP, aStr, iCol); //给玩家发独立消息 iCol是色彩索引
+       SendChatMsgByCol(PlayP, aStr, FCol, BCol); //给玩家发独立消息 FCol是字色彩值 BCol 背景色色彩值
+       MoveToServer(PlayP, MapId, X, Y); //移动玩家到某地图某坐标
+       GetPos(PlayP); //返回玩家坐标 local  X, Y = Player.GetPos(PlayP);
+       GetName(PlayP); //返回玩家名字
+       GetGuildName(PlayP) //玩家门派
+       GetGroupKey(PlayP); //团队
+       GetAge(PlayP); //返回年龄
+       GetMaxLife(PlayP); //活力最大值
+       GetCurLife(PlayP); //活力当前值
+       GetSex(PlayP); //性别
+       GetItemExistence(PlayP, ItemStr, Option); //返回 true 或者 false (非字符) 检查物品是否存在 ItemStr格式 名字:数量:段数:黄字:强化次数:强化值1:强化值2:强化值3:强化值4  Option 为0就检查段数和黄字 其他就不检查
+       GetFreeSpace(PlayP); //返回物品空格数
+       GetMagicSkillLevel(PlayP, MagicName); //返回等级
+       GetCurUseMagic(PlayP, MagicIndex); //返回当前使用武功的名字 MagicIndex 为 0 攻击性武功 1 护体 2步法 3心法 4辅助 5 特别武功
+       DelMagicByName(PlayP, MagicName); //返回0失败 1成功  -1是有密码保护  删除武功
+       GetItemCountByName(PlayP, ItemName); //返回物品数量
+       GetWearItemName(PlayP, WearPos); //返回穿戴位置装备名字 --1 护腕 2上衣 3鞋子 4 内裤 6外套 7头发 8帽子  9武器
+       ChangeCurDuraByName(PlayP, 物品名字, 持久数字); //无返回
+
+       SendSideMsg(PlayP, aStr); //无返回
+       SetWeaponLight(PlayP, 色彩数字); //无返回
+
+       GetOnlineTick(PlayP);  //返回玩家本次登录时间
+       GetSysopScope(PlayP);  //返回权限值 GM的大于99 玩家0
+       GetItemPassWord(PlayP); //返回密码 字符串
+       GetAttribTotal(PlayP); //返回属性总和 用于呐喊判断
+       SendLetter(PlayP, 纸条内容); //无返回 发送纸条消息
+       CheckBoLetter(PlayP, Name);  //检查目标是否接受自己的纸条
+       BoLetter(PlayP);           //检查自己是否接受纸条
+
+       AddItemToBag(PlayP, ItemData); //返回布尔类型  local ItemData = {Name = '', Count =0, UpGrade = 0, AddType = 0, ItemId = 0, BoAddAttrib = true }
+       AddWearItemByPos(PlayP, ItemData, 发放名字, 发放种族); //返回布尔类型 true 或者 false local ItemData = {Name = '', Count =0, UpGrade = 0, AddType = 0, ItemId = 0, BoAddAttrib = true, Color = 0 }
+       AddItemToWear(PlayP, ItemData, 发放名字, 发放种族); //返回布尔类型 true 或者 false local ItemData = {Name = '', Count =0, UpGrade = 0, AddType = 0, ItemId = 0, BoAddAttrib = true, Color = 0 }
+
+       SetNewShapeByItemId(PlayP, 物品id, 新外形Id, 新外形对应色彩); //无返回
+       GetNewShapeByItemId(物品id); //返回新外形ID
+
+
+       GetExpInfo(PlayP); //返回表 {ExpNum=0, ExpTick= 0}  例子 local Exp = Player.GetExpInfo(PlayP);    然后判断 if Exp ~= nil then n = Exp.ExpNum; <这个是经验倍数>
+       GetHaveItemInfoByPos(PlayP, Index);//获取物品栏第几个物品 返回表 {Name = '',Shape = 0, Color = 0, Count =0, Sex = 0, UpGrade = 0, AddType = 0, Kind = 0, LockState = 0, boNotExchange = true, Attribute= 1, GradeLevel = 0, GradeInfo = '', EquipSet = 0}最后2个是 段数 黄字   GradeLevel是强化等级
+       GetWearItemInfoByPos(PlayP, Index); //同上 是获得身上装备 
+       DelHaveItemByPos(PlayP, Index);  //删除物品栏第几个物品 返回 true or false 是是否删除成功
+       SetViewName(PlayP, ViewName); //设定蒙面人
+       ChangeToMonster(PlayP, 怪物名字); //设定成怪物形象
+       GetChangeMonsterName(PlayP);  //返回当前变身的怪物名字
+       RestoreToHuman(PlayP); //取消变身
+       InitEffect(PlayP, 特效编号, 特效持续时间, 特效显示延迟); //如果要持续效果 特效持续时间设定为 2147483647
+       UnInitEffect(PlayP, 特效编号);  //关闭特效
+
+       AddMagicByIndex(PlayP, 武功名字, 武功等级, 武功页面); //返回布尔类型 true 或者 false 
+       //武功面板ID索引  0 武功 1 上层 2 掌风 3 三层
+       ShowGuildMagicWindow(PlayP); //无返回 显示门派武功申请窗口
+       AddMagicAndLevel(PlayP, MagicName, MagicLevel); //没返回 
+       Putmagicitem(PlayP, ItemStr, SendName, Race); //给玩家物品 无返回 ItemStr格式 名字:数量:段数:黄字 SendName 交易记录里面记录的名字 Race 一般为4 指NPC
+       DelMagicItem(PlayP, ItemStr); //返回布尔类型 false or true 删除物品  ItemStr格式 名字:数量
+       DelAllItemByName(PlayP, ItemName); //返回布尔类型 false or true 删除指定名字的 所有物品 无返回 
+       CommandIce(PlayP, iceIndex);   //挑战公子 玩家进去被定住的那个
+       ShowWindow(PlayP, NpcP, FileName, ShowIndex); // ShowIndex为 1，帮助界面模式 2交易界面模式  如果不是点击npc使用 请设定 NpcP = 0;
+       ShowWindowByStr(PlayP, NpcP, aStr, ShowIndex);//ShowIndex为 1，帮助界面模式 2交易界面模式  如果不是点击npc使用 请设定 NpcP = 0;
+       DelWearItemByPos(PlayP, WearPos); //删除某穿戴位置装备    装备不会在窗口打开回档 所以没返回
+       ShowInputWindow(PlayP, NpcP, InputId,'寄卖', '价格'); //显示输入框
+       SetExpInfo(PlayP, ExpNum, ExpTick);  //设定多倍倍数和时间
+       SetAckEffect(PlayP, AckEffect); //设定攻击特效
+                      出现几率,百分比,特效数字,显示字符,... 总共3个
+        // AckEffect = {50, 30, 7011, '强击', 50, 30, 7011, '回血', 50, 30, 7011, '抵抗', }
+       GetLifeData(PlayP); //返回 LifeData格式 返回玩家本身的属性值 
+       GetAddLifeData(PlayP, iIndex); //返回 LifeData格式 iIndex 是服务器第几个额外属性数据
+       SetAddLifeData(PlayP, iIndex, LifeData; 时间值); //无返回 LifeData格式 iIndex 是服务器第几个额外属性数据 时间值是 100=1秒 设定0就表示没时间限制
+
+       GetAttrib(PlayP);  返回格式是 {'Age' =0, 'InPower' = 0, 'OutPower' = 0, 'Magic' = 0, 'Life' = 0, Energy = 0}
+       SetAttrib(PlayP, AttribData); 无返回. 参数是 AttribData = {'Age' =0, 'InPower' = 0, 'OutPower' = 0, 'Magic' = 0, 'Life' = 0,  Energy = 0} 第2参数请用上面语句返回在调整
+
+       ChangeMagicLevel(PlayP, MagicName, MagicLevel);  无返回 , MagicLevel指100-9999
+       ControlPlayByName(PlayP, Name); //控制其他玩家自己操作，返回是 false or true 如果Name为空 就是返回自己 如果控制对方成功就返回 true 其他的都是false
+       GetARoundPlayName(PlayP, aStr); //返回字符串 aStr格式是 '%s' 或者 'show-%s'; 准备在控制玩家的列表获取使用 支持N个%s 都会被替换成玩家名字
+       GetEquipLevelByIndex(PlayP, iIndex); 返回身上装备强化等级 --1 护腕 2上衣 3鞋子 4 内裤 6外套 7头发 8帽子  9武器
+
+       SetEquipAttribByIndex(PlayP, iIndex, iNum1, iNum2, iNum3, iNum4); //返回布尔 true or false  iIndex是装备位置 iNum 是强化属性  Sql版本不支持
+       SetEquipAttribByIndex(PlayP, iIndex, LifeData, 装备等级); //返回布尔型 LifeData格式 iIndex 是装备位置 LifeData是属性 Sql版本支持 装备等级如果不设定就是系统自动+1 设定就是等于设定的
+       GetEquipAttribByIndex(PlayP, iIndex); //返回 LifeData的表 iIndex是装备位置 Sql版本支持 
+
+       ClearEquipAttribByIndex(PlayP, iIndex); //清除index位置的装备强化属性
+       SLogItemWindow(PlayP);                  //显示福袋
+    //参数格式  见新脚本系统相关
+ 
+       //----ShowWindowByStr例子----
+         function GetWindowStr(NpcName, ShowStr)
+           local WinStr = "<Quest><head><title>"..NpcName.."</title><text>嗨，你好！</text></head>"..
+               "<command send='close'>好的</command><body>"..ShowStr.."</body></Quest>";
+
+           return WinStr;
+         end;
+
+        Player.ShowWindowByStr(PlayP, NpcP, GetWindowStr(Npc_Name, "\r这只是个示范。\r\r<a send='yesa'>（好的）"), 0);
+        //----end ShowWindowByStr例子----
+
+	GetJobKind(PlayP); //返回数字 技能类别
+	GetJobGrade(PlayP); //返回数字 技能等级
+        GetMagicCountBySkill(PlayP, 武功类别数字, 等级数字); //返回字符串 如果存在就 'true' 没有就是'false'
+	RepairItem(PlayP, 位置, 装备类别);  //返回数字大于2就是成功 否则失败
+	DestroyItembyKind(PlayP, 位置, 装备类别); //同上
+	CheckPowerWearItem(PlayP); //返回身上技能物品数量 返回数字
+	GetCurPowerLevelName(PlayP); //返回当前境界名字 字符
+	GetCurPowerLevel(PlayP); //返回境界等级 数字
+	CheckAttribItem(PlayP, 属性类别attrib); //返回字符串 'true' or 'false' 表示找到或没
+        BoFreedom(PlayP); //返回布尔值 判断玩家是否开着窗口  
+        SetAddAttribData(PlayerP, 0, AttribTab);//无返回  AttribTab = {Energy = 0,      InPower = 0, OutPower = 0, Magic = 0, Life = 1000};
+        
+	IdentWearItem(PlayP, 位置, LifeData信息); //鉴定装备 返回布尔值
+        ClearItemIdent(PlayP, 位置);  //清楚鉴定信息
+	SetCoverFace(PlayP, 布尔变量); //无返回 设定是否蒙面 装备是斗笠+忍者弓服 装备可以设定持久使用才消耗持久
+
+        MakeCombatPet(PlayP, 怪物名字, 是否任务); //无返回 怪物名字就是monster.sdb里面索引 是否任务是布尔星
+	  例: Player.MakeCombatPet(PlayP, '太极公子', true); //任务型怪 离开玩家视线就被删除
+
+        GetCombatPet(PlayP); //返回目标读取的monster.sdb里面名字
+	ClearCombatPet(PlayP); //删除玩家带的目标
+        SetCurLife(PlayP, 活力值);  //删除玩家血或者增加
+        ChangeState(PlayP, 状态数字);  //状态数字 0站立 1战斗姿势 2坐下 3死亡
+	SendCenterMsg(PlayP, 字符串); //发送玩家单体中间显示  
+	SendTipInfo(PlayP, 信息字符);无返回
+        LockExchange(PlayP, 布尔参数(true, false)); //锁定交易,同时禁止扔东西 false是可以交易 true就是禁止
+        GetAdaptive(PlayP); 返回数字 获取耐性
+        AddAdaptive(PlayP, 经验数字);
+        GetVirtue(PlayP); 返回数字 获取浩然  
+        AddVirtue(PlayP, 经验数字);
+        SetPowerLevel(PlayP, 境界数字)
+        //---月卡脚本---
+        GetPlayInfo(PlayP);  //返回当前时间类型数字 和 时间字符串
+        SetPlayInfo(PlayP, 时间类型, 分钟);  类型有 (0: 免费; 1: 3天体验, 2: 付费, 3: 试玩时间);
+        GetAreaName(PlayP); //返回地图区域名称        
+        SendARoundChatMsg(PlayP, 发送内容，字色彩，背景色); 这个是以PlayP为中心广播
+
+ PlayerList.GetUserPointer(Name); //返回2个值 第一个是玩家的playP, 第2个参数是 布尔型
+            GetUserPointerById(id); //同上
+	    GuildSay(GuildName, aStr); //发门派通告
+	    GetGuildUserInfo(GuildName); //类似 /who 只是返回成字符串
+	    SayByServerID(MapId, aStr, iCol); //发给某地图玩家信息 聊天窗显示 iCol 是色彩
+	    MoveByServerId(MapId, TargetId, X, Y); //移动某地图玩家到另一地图坐标
+	    SetActionStateByServerID(MapId, iState); //给某地图玩家上状态   iState 0 正常 1 禁止移动 2 减速
+	    SendSideMessageByServerID(MapId, aStr); //信息显示在左侧拾取物品那个地方
+	    SendSoundMessage(aSound, MapId); //给某地图所有玩家播放一个声音
+	    SendNoticeMessage(aStr, iCol); //发一条信息给所有玩家  聊天窗显示
+	    SendCenterMessage(aStr);   //游戏中间显示信息
+	    SendCenterMessagebyMapID(aStr, MapId);//给某地图玩家发中间公告
+	    SendTopMessage(aStr);  //左上角信息
+	    SendTopLetterMessage(aName, aStr1, aStr2);
+	    SendScreenEffectToAll(特效编号, 特效延迟); //给所有人发特效
+	    GetUserList(); //返回所有玩家名字
+	    GetUserCountByManager(MapId)  //返回某地图玩家数量
+	    AddItemAllUserByMapId(MapId, 发放着名字, 物品:数量:等级:黄字); //给某地图所有玩家发物品
+	    AddItemUserByGroupAndMapID(MapId, 团队色, 发放者名字,物品:数量:等级:黄字); //指定地图和团队发放
+	    DeleteItemAllUserbyMapId(MapId, 物品); //某地图所有玩家删除某物品
+	    GetRemainGuildUserbyServerId(MapId, 门派名字); //返回某地图 某门派 玩家数量
+	    GetUserCount(); //返回总人数
+            SendNoticeMessageByCol(aStr, FCol, BCol); //群发聊天信息 自定义色彩
+

@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>根据id查找在线玩家</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>根据Id查找在线玩家</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; PlayerList.GetUserPointerById(角色Id);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp; 根据名字查找在线玩家，返回2个参数 1 在线玩家的P值 2 是否找到 <br>
+&nbsp;&nbsp;&nbsp; Id 是玩家在线时服务器赋值，离线再登录会改变 获取:Player.GetCharId(PlayP);<br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br>
+&nbsp;&nbsp;local FindP, BoFind = PlayerList.GetUserPointerById(角色Id);<br>
+&nbsp;&nbsp;if BoFind then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;玩家在线 可以使用FindP做参数<br>
+&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;玩家不在线或者Id不对, 必须跳出<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return<br>
+&nbsp;&nbsp;end;<br>
+</body>
+
+</html>

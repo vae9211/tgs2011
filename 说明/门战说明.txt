@@ -1,0 +1,32 @@
+----tgsplus\GuildWarTime.sdb----
+
+字段 
+
+Week  周一到周日 设定 1-7
+
+WarStartTime  开始时间  12:00:00
+WarEndTime    结束时间  23:00:00
+
+ps.每天只能设定一次时段门战  建议系统时间格式修改成 24小时模式
+
+------\tgsplus\GuildWarDecDur.sdb-------
+字段
+WeaponName  玩家武器名字
+WeaponDecDur 减少持久数
+
+如果武器不存在 或者空拳 就减少20点持久
+
+
+-----tgsplus\GuildAddDur.sdb----
+
+字段
+
+ItemName 物品名字
+AddDurability 增加持久数量
+AddPerTick 加血间隔
+
+===item.sdb里面 物品的 kind ==
+kind = 61 是非门战时补血
+kind = 62 是门战和非门战时都可以补血 
+
+2种物品类型 加血间隔叠加 不是分开计算间隔时间

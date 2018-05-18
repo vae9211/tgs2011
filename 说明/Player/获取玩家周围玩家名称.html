@@ -1,0 +1,28 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取玩家周围玩家名称</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>获取玩家周围玩家名称</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Player.GetARoundPlayName(PlayP, aStr);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp;返回字符串 aStr格式是 '%s' 或者 'show-%s'; 准备在控制玩家的列表获取使用 支持N个%s 都会被替换成玩家名字 <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+<META>
+&nbsp;&nbsp;local GetAroundName = Player.GetARoundPlayName(PlayP, '%s,');<br>
+%s做参数 返回名字类似 测试角色,角色名称,
+
+</META>
+</body>
+
+</html>

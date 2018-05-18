@@ -1,0 +1,30 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>根据名字查找在线玩家</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>根据名字查找在线玩家</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; PlayerList.GetUserPointer(角色名字);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp; 根据名字查找在线玩家，返回2个参数 1 在线玩家的P值 2 是否找到 <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br>
+&nbsp;&nbsp;local FindP, BoFind = PlayerList.GetUserPoiter(FindName);<br>
+&nbsp;&nbsp;if BoFind then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;玩家在线 可以使用FindP做参数<br>
+&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;玩家不在线或者名字不对, 必须跳出<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return<br>
+&nbsp;&nbsp;end;<br>
+</body>
+
+</html>

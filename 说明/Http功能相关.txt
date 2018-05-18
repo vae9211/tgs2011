@@ -1,0 +1,22 @@
+1, 配置ip端口
+   sv1000.ini
+   [server]
+   HTTPIp = 127.0.0.1
+   HTTPPort = 8080
+
+2, web.lua 在NewScript目录存在
+   
+   Http调用的脚本函数
+   function OnWebInfo(...)
+     arg[1]  arg[1]是GET时 http://127.0.0.1/xxxx 中 /xxxx的内容  arg[1]是post时 参考附带的login.html中的 'post'
+     arg[2]  网页获取模式 比如 'GET', 'POST'
+     arg[3]  访问的IP
+     return xxx   --xxx信息是返回给网页显示的内容 具体百度html格式 
+   end;
+
+3, 重读web脚本命令  @scriptload web 
+
+4, 限制ip 访问 tgs目录存在 allowip.txt 内容为空就是都可以 内容填写就是存在的才可以访问
+   
+   当然如果 sv1000.ini的HTTPIp 设定为 127.0.0.1 外网就访问不了。 设定 0.0.0.0 就是机器上所有ip可以访问
+

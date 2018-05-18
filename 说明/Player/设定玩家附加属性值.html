@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>设定玩家附加属性值</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>设定玩家附加属性值</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Player.SetAddLifeData(PlayP, iIndex, iTick);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp;根据iIndex 设定对应属性值 iTick 单位是 10毫秒 100=1秒  <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+<META>
+ LifeData = {      DamageBody =0,    DamageHead = 0,   DamageArm = 0,    DamageLeg = 0,    DamageEnergy = 0, 
+                        ArmorBody = 0,     ArmorHead = 0,    ArmorArm = 0,     DrmorLeg = 0,     ArmorEnergy = 0,  Armorevalue = 0, 
+                        AttackSpeed = -5,  Accuracy = 10,     Avoid = 0,        KeepRecovery = 0, Recovery = 0
+                  }
+iTick = 10 * 100 --10秒
+&nbsp;&nbsp;Player.SetAddLifeData(PlayP, 0, LifeData, iTick);<br>
+</META>
+</body>
+
+</html>

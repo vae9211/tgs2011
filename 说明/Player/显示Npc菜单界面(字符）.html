@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>显示Npc菜单使用字符串</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><font color="#0000FF"><b>显示Npc菜单使用字符串</b></font><br>
+<br>
+<font color="#0000FF"><b>格式：</b></font><br>
+&nbsp;&nbsp;&nbsp; Player.ShowWindowByStr(PlayP, NpcP, ShowStr, ShowIndex);<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+&nbsp;&nbsp;&nbsp; 推荐 ShowIndex = 0, ShowStr 是格式化的字符串 <br>
+<br>
+<b><font color="#0000FF">示例：</font></b><br>
+<br> 
+<META>
+&nbsp;&nbsp;local MainMenu =<br>
+&nbsp;&nbsp;[[&lt;trade><br>
+&nbsp;&nbsp;&lt;title>船夫&lt;/title><br>
+&nbsp;&nbsp;&lt;text><br>
+&nbsp;&nbsp;  闯荡江湖之前建议您先加强自身属性.<br>
+&nbsp;&nbsp;&lt;/text><br>
+&nbsp;&nbsp;&lt;command send='close'>关闭</command><br>
+&nbsp;&nbsp;&lt;body><br>
+&nbsp;&nbsp;    你身不在江湖，江湖已经拥有你的传说。<br>
+&nbsp;&nbsp;&lt;/body><br>
+&nbsp;&nbsp;&lt;/trade><br>
+&nbsp;&nbsp;]];<br>
+&nbsp;&nbsp;Player.ShowWindowByStr(PlayP, NpcP, MainMenu, 0);<br>
+</META>
+</body>
+
+</html>
