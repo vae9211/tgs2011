@@ -12,8 +12,8 @@
     * 新脚本目前是使用lua (64位系统的机器 应该不支持新脚本)
 
 * NewScript\LuaScriptList.sdb 第一行请使用当前的 必须是0开始顺序排下去
-    :注: tgs2011版本更新至2017.09.19之后，序号可以不按顺序，只要不重复就行
-    设定后在Npc和怪物如果想调用新脚本，序号+10000
+    注: tgs2011版本更新至2017.09.19之后，序号可以不按顺序，只要不重复就行
+* 设定后在Npc和怪物如果想调用新脚本，序号+10000
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -26,7 +26,7 @@ tgsplus目录
 * GuildWarDecDur.sdb 门战武器伤害设置
 * GuildAddDur.sdb 门战加血设置
 * MonsterDrop.sdb 怪物掉落公告
-    :注: Player.lua脚本 function OnDropItem() 如果返回不是 'true' 就调用这个
+    注: Player.lua脚本 function OnDropItem() 如果返回不是 'true' 就调用这个
 ::
 
     ItemName,SuccessPer,GradeMaxNum,AttribMaxNum,TipStr,StrColor,BoShowAttrib,
