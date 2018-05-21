@@ -1,0 +1,48 @@
+.. _introduction:
+============
+功能介绍
+============
+
+.. _tgs2011-start:
+
+使用相关
+------------------------------------------------
+.. attention ::
+    * 如果不想使用新脚本 方法很简单 删除 NewScript目录
+    * 新脚本目前是使用lua (64位系统的机器 应该不支持新脚本)
+
+* NewScript\LuaScriptList.sdb 第一行请使用当前的 必须是0开始顺序排下去
+    :注: tgs2011版本更新至2017.09.19之后，序号可以不按顺序，只要不重复就行
+    设定后在Npc和怪物如果想调用新脚本，序号+10000
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _tgsplus-path:
+
+tgsplus目录
+------------------------------------------------
+* maigcadd.sdb 满级武功额外增强属性
+* GuildWarTime.sdb 门战时段
+* GuildWarDecDur.sdb 门战武器伤害设置
+* GuildAddDur.sdb 门战加血设置
+* MonsterDrop.sdb 怪物掉落公告
+    :注: Player.lua脚本 function OnDropItem() 如果返回不是 'true' 就调用这个
+::
+
+    ItemName,SuccessPer,GradeMaxNum,AttribMaxNum,TipStr,StrColor,BoShowAttrib,
+    三叉戟,100,4,20,%1打败%2掉落%3段%4属性%5装备,17,TRUE,
+    肉,100,0,0,%s打败%s掉落物品%s,17,,
+    # %1代表玩家名字 %2怪物名字 %3段数 %4金字 %5物品名字
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _init-path:
+
+Init目录
+------------------------------------------------
+* Monster.sdb 字段 Virtue 设定大于等于 10000 怪物走路不容易被卡住
+* 符人
+    - Npc.sdb添加好名字 Npc的血就是符人的血
+    - Item.sdb 添加物品 Kind = 63 增加字段petname对应npc里面名字
+* 技能加工清除装备属性是 物品kind = 47
+* 增加新物品 kind = 202 如果升级时存在升段物品不爆 MaxGrade调整为失败降低的段数
