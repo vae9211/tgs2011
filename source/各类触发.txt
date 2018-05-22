@@ -1,0 +1,293 @@
+.. _game-event:
+
+============
+各类触发
+============
+Npc/怪物专用
+
+.. event-OnHear:
+
+OnHear
+-----------------------------------
+::
+
+    # ...是说话内容
+    function OnHear(SelfP, SayP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnShow:
+
+OnShow
+-----------------------------------
+::
+
+    # ...为空
+    function OnShow(SelfP, ShowP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnCreate:
+
+OnCreate
+-----------------------------------
+::
+
+    # ...为空
+    function OnCreate(SelfP, CreateP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDestroy:
+
+OnDestroy
+-----------------------------------
+::
+
+    # ...为空
+    function OnDestroy(SelfP, DestroyP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDanger:
+
+OnDanger
+-----------------------------------
+::
+
+    # ...为空 返回字符串'false'表示伤害失败
+    function OnDanger(SelfP, ShowP, ...)
+        return 'false'
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnHit:
+
+OnHit
+-----------------------------------
+::
+
+    # ...为空
+    function OnHit(SelfP, HitP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnBow:
+
+OnBow
+-----------------------------------
+::
+
+    # ... arg[1]为箭名称
+    function OnBow(SelfP, BowP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDie:
+
+OnDie
+-----------------------------------
+::
+
+    # ...为空 AckP有可能是nil
+    function OnDie(SelfP, AckP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDieBefore:
+
+OnDieBefore
+-----------------------------------
+::
+
+    # ...为空 AckP为nil
+    function OnDieBefore(SelfP, AckP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnLeftClick:
+
+OnLeftClick
+-----------------------------------
+::
+
+    # ...为空
+    function OnLeftClick(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDblClick:
+
+OnDblClick
+-----------------------------------
+::
+
+    # ...arg[1]是物品栏索引 SelfP = CliclP
+    function OnDblClick(SelfP, ClickP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnDropItem:
+
+OnDropItem
+-----------------------------------
+::
+
+    # 盒子类物品专用 ... arg[1]物品名字
+    function OnDropItem(SelfP, PickP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnChangeState:
+
+OnChangeState
+-----------------------------------
+::
+
+    # ... arg[1]为字符串 'die', 'normal'
+    function OnChangeState(SelfP, AckP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnMove:
+
+OnMove
+-----------------------------------
+::
+
+    # 跳点类用 ...为空
+    function OnMove(SelfP, MoveP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnTimer:
+
+OnTimer
+-----------------------------------
+::
+
+    # ... arg[1]部分时候为时间 OtherP为空
+    function OnTimer(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnApproach:
+
+OnApproach
+-----------------------------------
+::
+
+    # ...为空
+    function OnApproach(SelfP, ApproachP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnAway:
+
+OnAway
+-----------------------------------
+::
+
+    # ...为空
+    function OnAway(SelfP, AwayP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnArrival:
+
+OnArrival
+-----------------------------------
+::
+
+    # OtherP为空 ...为空
+    function OnArrival(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnGetResult:
+
+OnGetResult
+-----------------------------------
+::
+
+    # Npc专用 菜单返回 ... arg[1]是返回字符串
+    function OnGetResult(SelfP, ClickP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnTurnOn:
+
+OnTurnOn
+-----------------------------------
+::
+
+    # 盒子类专用 OtherP为空 ...为空
+    function OnTurnOn(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnTurnOff:
+
+OnTurnOff
+-----------------------------------
+::
+
+    # 盒子类专用 OtherP为空 ...为空
+    function OnTurnOff(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnRegen:
+
+OnRegen
+-----------------------------------
+::
+
+    # 怪物/盒子类专用 OtherP为空 ...为空
+    function OnRegen(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnGetChangeStep:
+
+OnGetChangeStep
+-----------------------------------
+::
+
+    # Npc类专用 ...不为空
+    function OnGetChangeStep(SelfP, OtherP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. event-OnInputString:
+
+OnInputString
+-----------------------------------
+::
+
+    # Npc类专用 ... arg[1]是输入key arg[2]是输入字符串
+    function OnInputString(CmdP, SelfP, ...)
+    end

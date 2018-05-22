@@ -1,0 +1,341 @@
+.. _Player-func:
+
+============
+Player函数
+============
+
+.. attention ::
+    * Player函数是tgs2011封装的方法，区别于 :ref:`Player.lua<Player-lua>`
+
+.. _Player-MoveToServer:
+
+传送玩家
+-----------------------------------
+**格式：**
+ | Player.MoveToServer(PlayP, MapId, X, Y)
+**示例：**
+::
+
+    # 将玩家PlayP传送到中央市场(500,500)
+    Player.MoveToServer(PlayP, 1, 500, 500)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ShowInputWindow:
+
+弹出输入框窗口
+-----------------------------------
+**格式：**
+ | Player.ShowInputWindow(PlayP, NpcP, InputId, 'Key', '提示')
+**说明：**
+ | 根据NpcP的不同在Npc脚本或者Player.lua获取输入字符串 OnInputString
+**示例：**
+::
+
+    # 求婚系统弹出的输入求婚对象名称的窗口
+    Player.ShowInputWindow(PlayP, NpcP, InputId, '求婚系统', '请输入求婚对象名称')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-CommandIce:
+
+冻结玩家一段时间
+-----------------------------------
+**格式：**
+ | Player.CommandIce(PlayP, iceTime)
+**说明：**
+ | iceTime冻结时间(10毫秒) 冻结和解冻都是这句 解冻iceTime设为0
+**示例：**
+::
+
+    # 将玩家PlayP冻结10秒
+    Player.CommandIce(PlayP, 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SendARoundChatMsg:
+
+发消息给玩家周围玩家
+-----------------------------------
+**格式：**
+    | Player.SendARoundChatMsg(PlayP, aStr, FCol, BCol)
+**说明：**
+    | 这个是以PlayP为中心同屏广播, FCol, BCol 取值 0~65534
+**示例：**
+::
+
+    # 给玩家PlayP周围发送消息 大家好~
+    Player.SendARoundChatMsg(PlayP, '大家好~', 32767, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ChangeCurDuraByName:
+
+改变玩家某装备持久
+-----------------------------------
+**格式：**
+    | Player.ChangeCurDuraByName(PlayP, ItemName, Index)
+**说明：**
+    | 无返回 对有耐久消耗物品有效
+**示例：**
+::
+
+    # 将玩家PlayP的 男子黄龙弓服 改为1000耐久
+    Player.ChangeCurDuraByName(PlayP, '男子黄龙弓服', 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ChangeMagicLevel:
+
+改变武功等级
+-----------------------------------
+**格式：**
+    | Player.ChangeMagicLevel(PlayP, MagicName, MagicLevel)
+**说明：**
+    | 无返回 , MagicLevel取值 100~9999
+**示例：**
+::
+
+    # 将玩家PlayP的 无影脚 修炼等级改为99.99
+    Player.ChangeMagicLevel(PlayP, '无影脚', 9999)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SendChatMsg:
+
+给玩家发聊天框消息
+-----------------------------------
+**格式：**
+    | Player.SendChatMsg(PlayP, aStr, iCol)
+**说明：**
+    | 无返回 , iCol取值 1~15
+**示例：**
+::
+
+    # 给玩家PlayP发送上线欢迎
+    Player.SendChatMsg(PlayP, '欢迎来到千年的世界！祝您游戏愉快~~', 2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SendChatMsgByCol:
+
+给玩家发自定义色彩聊天框消息
+-----------------------------------
+**格式：**
+    | Player.SendChatMsgByCol(PlayP, aStr, FCol, BCol)
+**说明：**
+    | 无返回 , FCol, BCol取值都是 0~65534
+**示例：**
+::
+
+    # 给玩家PlayP发送上线欢迎
+    Player.SendChatMsgByCol(PlayP, '欢迎来到千年的世界！祝您游戏愉快~~', 32767, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SendSideMsg:
+
+给玩家发左侧边消息
+-----------------------------------
+**格式：**
+    | Player.SendSideMsg(PlayP, aStr)
+**示例：**
+::
+
+    # 给玩家PlayP发送获得称号提示
+    Player.SendSideMsg(PlayP, '获得称号 天下第一!')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-InitEffect:
+
+给玩家添加持续特效
+-----------------------------------
+**格式：**
+    | Player.InitEffect(PlayP, Index, iTick, Delay)
+**说明：**
+    | 自定义特效显示 当然改成烟花类也可以
+**示例：**
+::
+
+    # 玩家PlayP无延迟播放1001特效200000(单位请自行测试，应该是10毫秒)
+    Player.InitEffect(PlayP, 1001, 200000, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-AddMagicAndLevel:
+
+给玩家添加某等级的武功
+-----------------------------------
+**格式：**
+    | Player.AddMagicAndLevel(PlayP, MagicName, MagicLevel)
+**说明：**
+    | 无返回 要预先判断武功是否已存在
+**示例：**
+::
+
+    # 给玩家PlayP添加满级的无影脚
+    Player.AddMagicAndLevel(PlayP, '无影脚', 9999)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-Putmagicitem:
+
+给玩家添加某物品
+-----------------------------------
+**格式：**
+    | Player.Putmagicitem(PlayP, ItemStr, SendName, Race)
+**说明：**
+    | 无返回 支持'名称:数量:段数:黄字' 要预先判断物品栏是否有空位
+**示例：**
+::
+
+    # 给玩家PlayP添加新人礼包
+    Player.Putmagicitem(PlayP, '新人礼包:1', '新手物品', 4)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-AddMagicByIndex:
+
+给玩家添加自定义面板武功
+-----------------------------------
+**格式：**
+    | Player.AddMagicByIndex(PlayP, MagicName, MagicLevel, Index)
+**说明：**
+    | 返回布尔判断是否添加成功 Index 0武功 1上层 2掌风 3三层
+**示例：**
+::
+
+    # 给玩家PlayP武功面板添加满级无影脚
+    local BoAdd = Player.AddMagicByIndex(PlayP, '无影脚', 9999, 0)
+    if BoAdd then
+        Player.SendChatMsg(PlayP, '修炼武功成功~~', 2)
+    else
+        Player.SendChatMsg(PlayP, '修炼武功失败~~', 2)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelHaveItemByPos:
+
+根据位置删除物品栏物品
+-----------------------------------
+**格式：**
+    | Player.DelHaveItemByPos(PlayP, Index)
+**说明：**
+    | 返回布尔值是否成功 Index物品栏第几个物品 默认0-29
+**示例：**
+::
+
+    # 删除物品栏第一个格子的物品，成功逻辑继续
+    local BoDel = Player.DelHaveItemByPos(PlayP, 0)
+    if BoDel then
+        -- todo
+    else
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-UnInitEffect:
+
+关闭玩家某持续特效
+-----------------------------------
+**格式：**
+    | Player.UnInitEffect(PlayP, Index)
+**说明：**
+    | 无返回 取消特效显示
+**示例：**
+::
+
+    # 关闭玩家PlayP的1001特效
+    Player.UnInitEffect(PlayP, 1001)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetOnlineTick:
+
+获取玩家本次在线时长
+-----------------------------------
+**格式：**
+    | Player.GetOnlineTick(PlayP)
+**说明：**
+    | 返回数字 单位请自行测试
+**示例：**
+::
+
+    # 获取玩家PlayP本次在线时间
+    local OnlineTick = Player.GetOnlineTick(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetLifeData:
+
+获取玩家本身属性值
+-----------------------------------
+**格式：**
+    | Player.GetLifeData(PlayP)
+**说明：**
+    | 返回LifeData格式 玩家本身的属性值
+**示例：**
+::
+
+    # 获取玩家PlayP本身的属性值
+    local LifeData = Player.GetLifeData(PlayP)
+
+    # LifeData格式如下 字段意思请自行百度英文翻译
+    LifeData = {DamageBody=0, DamageHead=0, DamageArm=0, DamageLeg=0,
+    DamageEnergy=0, ArmorBody=0, ArmorHead=0, ArmorArm=0,
+    ArmorLeg=0, ArmorEnergy=0, Armorevalue=0, AttackSpeed=0,
+    Accuracy=10, Avoid=0, KeepRecovery=0, Recovery=0}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetChangeMonsterName:
+
+获取玩家变身怪物名称
+-----------------------------------
+**格式：**
+    | Player.GetChangeMonsterName(PlayP)
+**说明：**
+    | 返回字符串 玩家变身后的怪物名字
+**示例：**
+::
+
+    # 获取玩家PlayP变身后的怪物名字
+    local MopName = Player.GetChangeMonsterName(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-BoFreedom:
+
+获取玩家当前窗口状态
+-----------------------------------
+**格式：**
+    | Player.BoFreedom(PlayP)
+**说明：**
+    | 返回布尔值 窗口是否自由
+**示例：**
+::
+
+    # 获取玩家窗口状态
+    local BoFree = Player.BoFreedom(PlayP)
+    if not BoFree then
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetCurUseMagic:
+
+获取玩家当前使用武功
+-----------------------------------
+**格式：**
+    | Player.GetCurUseMagic(PlayP, MagicIndex)
+**说明：**
+    | 返回当前使用武功的名字 MagicIndex 0攻击性武功 1护体 2步法 3心法 4辅助 5特别武功
+**示例：**
+::
+
+    # 获取玩家攻击性武功
+    local AckMagicName = Player.GetCurUseMagic(PlayP, 0)

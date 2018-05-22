@@ -1,3 +1,5 @@
+.. _index:
+
 tgs2011参考手册
 ========================
 
@@ -7,3 +9,5 @@ tgs2011参考手册
     version.txt
     intro.txt
     player.txt
+    各类触发.txt
+    函数Player.txt

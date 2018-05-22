@@ -1,10 +1,11 @@
 ﻿.. _Player-lua:
+
 ============
 Player.lua
 ============
 
 .. attention ::
-    * Player.lua 是【tgs/NewScript】目录下的一个文件。区别于 :ref:`函数Player`
+    * Player.lua 是【tgs/NewScript】目录下的一个文件。区别于 :ref:`Player函数<Player-func>`
 
 .. _OnUserStart:
 
@@ -227,4 +228,30 @@ Player.lua
 
     # arg[1]是武功名字
     function OnChangeMagic(MopP, PlayP, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _OnItemInfoShow:
+
+显示描述
+---------------------------------------------------
+* 右键物品触发此函数
+    注: 通过返回字符串可更改物品描述内容
+::
+
+    # arg[1]是描述字符串
+    function OnItemInfoShow(Play, ItemData, ...)
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _OnUserHit:
+
+受到攻击
+---------------------------------------------------
+* 玩家受到攻击时触发此函数
+::
+
+    function OnUserHit(Play, HitdP, ...)
     end
