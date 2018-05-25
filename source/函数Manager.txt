@@ -4,4 +4,224 @@
 Manager函数
 ============
 
-文档完善中...
+.. _Manager-GetExpByLevel:
+
+等级转换经验
+-----------------------------------
+**格式：**
+    | Manager.GetExpByLevel(iLevel)
+**说明：**
+    | 返回经验值 iLevel是等级 取值 100~9999
+**示例：**
+::
+
+    # 获得满级的经验值
+    local iExp = Manager.GetExpByLevel(9999)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-GetLevelByExp:
+
+经验值转换等级
+-----------------------------------
+**格式：**
+    | Manager.GetLevelByExp(iExp)
+**说明：**
+    | 返回等级 iExp指的是经验值
+**示例：**
+::
+
+    # 获得经验值对应的等级
+    local iLevel = Manager.GetLevelByExp(100000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-ChangeDynObjState:
+
+改变物件的状态
+-----------------------------------
+**格式：**
+    | Manager.ChangeDynObjState(MapId, DynObjName, Boolean)
+**说明：**
+    | 参数是 MapId地图编号 DynObjName物件名称 Boolean物件状态 true false
+**示例：**
+::
+
+    # 长城以南的火炉一生火 true生火 false就是熄灭
+    Manager.ChangeDynObjState(1, '火炉一', true)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-GetDistance:
+
+获取2个目标之间距离
+-----------------------------------
+**格式：**
+    | Manager.GetDistance(ObjP1, ObjP2)
+**说明：**
+    | 返回数字 两者的距离 不会判断是否在一个地图
+**示例：**
+::
+
+    # 获取查找到的玩家和你之间的距离
+    local distance = Manager.GetDistance(PlayP, FindP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-GetMapRemainTickById:
+
+获取地图剩余时间
+-----------------------------------
+**格式：**
+    | Manager.GetMapRemainTickById(MapId)
+**说明：**
+    | 返回数字 编号为MapId的地图的剩余时间
+**示例：**
+::
+
+    # 获取太极密室的剩余时间
+    local iTick = Manager.GetMapRemainTickById(32)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-GetRaceByP:
+
+获取指定目标种族
+-----------------------------------
+**格式：**
+    | Manager.GetRaceByP(ObjP)
+**说明：**
+    | 返回数字 1玩家 3怪物 4NPC
+**示例：**
+::
+
+    # 获取ObjP的种族
+    local Race = Manager.GetRaceByP(ObjP)
+    if Race == 1 then
+        -- 这是玩家
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-CheckEnterMap:
+
+检查地图是否可以进入
+-----------------------------------
+**格式：**
+    | Manager.CheckEnterMap(MapId)
+**说明：**
+    | 返回布尔值
+**示例：**
+::
+
+    # 检查太极密室是否可以进入
+    local BoEnter = Manager.CheckEnterMap(32)
+    if not BoEnter then
+        -- 太极公子正忙...
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-CheckObjectAlive:
+
+检查地图是否有目标依然有存在
+-----------------------------------
+**格式：**
+    | Manager.CheckObjectAlive(MapId, RaceStr, ObjName)
+**说明：**
+    | 返回布尔值 RaceStr是种族字符串 ObjName是目标名字
+    | RaceStr格式为 'MONSTER' 'NPC' 'DYNAMICOBJECT'
+**示例：**
+::
+
+    # 检查太极密室是否有太极公子
+    if Manager.CheckObjectAlive(32, 'NPC', '太极公子') then
+        -- 太极公子还活着
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-IsGuildSysOp:
+
+判断某玩家的门派权限
+-----------------------------------
+**格式：**
+    | Manager.IsGuildSysOp(GuildName, PlayName)
+**说明：**
+    | 返回数字 1门主 2副门主 3普通成员 0不是门派成员或者门派不存在
+**示例：**
+::
+
+    # 检查千年爱好者在千年门派的权限
+    if Manager.IsGuildSysOp('千年', '千年爱好者') == 1 then
+        -- 千年爱好者是千年门派的门主
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-DelMapMonsterByName:
+
+删除地图指定名字所有怪物
+-----------------------------------
+**格式：**
+    | Manager.DelMapMonsterByName(MapId, MonsterName)
+**说明：**
+    | 返回布尔值
+**示例：**
+::
+
+    # 删除长城以南的所有活动怪
+    if Manager.DelMapMonsterByName(1, '攻城火王') then
+        -- 删除成功
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-SetAllowDelete:
+
+设定某目标可以删除
+-----------------------------------
+**格式：**
+    | Manager.SetAllowDelete(MapId, RaceStr, ObjName)
+**说明：**
+    | 设定为可以删除的目标将在下次系统循环时删除
+    | RaceStr是种族字符串 参考 :ref:`检查地图是否有目标依然有存在<Manager-CheckObjectAlive>`
+**示例：**
+::
+
+    # 设定长城以南的所有活动怪可以删除
+    Manager.SetAllowDelete(1, 'MONSTER', '攻城火王')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-RegenMapTickByIndex:
+
+刷新地图剩余时间
+-----------------------------------
+**格式：**
+    | Manager.RegenMapTickByIndex(MapId)
+**说明：**
+    | 刷新编号为MapId的地图的剩余时间
+**示例：**
+::
+
+    # 刷新太极密室剩余时间
+    Manager.RegenMapTickByIndex(32)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-AddMonsterToMap:
+
+添加怪物到地图
+-----------------------------------
+**格式：**
+    | Manager.AddMonsterToMap(MapId, MonsterName, X, Y, W, ScriptIndex, Boolean)
+**说明：**
+    | 如果返回值为0 就是创建失败了
+    | MapId地图编号 (X,Y)坐标 W范围 ScriptIndex脚本索引为 Boolean是否重生
+    | Boolean取值 true怪物死亡刷新 false怪物死亡不刷新
+**示例：**
+::
+
+    # 长城以南(500,500)增加刷新范围为3的攻城火王 绑定脚本10086 死亡不刷新
+    Manager.AddMonsterToMap(1, '攻城火王', 500, 500, 3, 10086, false)

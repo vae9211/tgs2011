@@ -4,4 +4,301 @@
 PlayerList函数
 ============
 
-文档完善中...
+.. _PlayerList-MoveByServerId:
+
+地图玩家整体传送
+-----------------------------------
+**格式：**
+    | PlayerList.MoveByServerId(MapId, TargetId, X, Y)
+**说明：**
+    | 将编号为MapId的地图的所有玩家传送到编号为TargetId的地图的坐标(X,Y)
+**示例：**
+::
+
+    # 将地图49(一般为新人村)的所有玩家传送到长城以南(500,500)
+    PlayerList.MoveByServerId(49, 1, 500, 500)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-AddItemAllUserByMapId:
+
+给地图所有玩家发物品
+-----------------------------------
+**格式：**
+    | PlayerList.AddItemAllUserByMapId(MapId, SendName, ItemStr)
+**说明：**
+    | 给在编号为MapId的地图的所有玩家发放物品
+**示例：**
+::
+
+    # 给长城以南的所有玩家发放100金元
+    PlayerList.AddItemAllUserByMapId(1, '节日活动', '金元:100')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendSideMessageByServerID:
+
+给地图玩家发侧边信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendSideMessageByServerID(MapId, aStr)
+**说明：**
+    | 给在编号为MapId的地图的所有玩家发侧边信息
+**示例：**
+::
+
+    # 给长城以南的所有玩家提示获得了经验
+    PlayerList.SendSideMessageByServerID(1, '经验获得 1000')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendSoundMessage:
+
+给地图玩家发声音
+-----------------------------------
+**格式：**
+    | PlayerList.SendSoundMessage(wavId, MapId)
+**说明：**
+    | 给在编号为MapId的地图的所有玩家播放声音
+    | wavId为声音编号 在客户端wav目录
+**示例：**
+::
+
+    # 给长城以南的所有玩家播放声音1001
+    PlayerList.SendSoundMessage(1001, MapId)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SetActionStateByServerID:
+
+给地图玩家加状态
+-----------------------------------
+**格式：**
+    | PlayerList.SetActionStateByServerID(MapId, iState)
+**说明：**
+    | 给在编号为MapId的地图的所有玩家添加状态
+    | iState为状态编号 0正常 1禁止移动 2减速
+**示例：**
+::
+
+    # 禁止长城以南的所有玩家移动
+    PlayerList.SetActionStateByServerID(1, 1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-AddItemUserByGroupAndMapID:
+
+给地图指定团队玩家发物品
+-----------------------------------
+**格式：**
+    | PlayerList.AddItemUserByGroupAndMapID(MapId, Group, SendName, ItemStr)
+**说明：**
+    | 给在编号为MapId的地图的所有Group团队的玩家发物品
+    | Group为团队编号 取值 100~9999
+**示例：**
+::
+
+    # 给长城以南的所有团队为100的玩家发放1000个生药
+    PlayerList.AddItemUserByGroupAndMapID(1, 100, '门战补给', '生药:1000')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendNoticeMessage:
+
+给所有玩家发聊天框信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendNoticeMessage(aStr, iCol)
+**说明：**
+    | iCol为色彩索引 取值 0~15
+**示例：**
+::
+
+    # 给所有玩家发送新人加入游戏提示
+    PlayerList.SendNoticeMessage('欢迎玩家XXX加入千年的精彩世界~~', 2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendCenterMessage:
+
+给所有玩家发中间信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendCenterMessage(aStr)
+**说明：**
+    | 形式为GM喊话样式 在屏幕中央比较醒目
+**示例：**
+::
+
+    # 给所有玩家发送节日活动提示
+    PlayerList.SendCenterMessage('节日活动开始了！')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendNoticeMessageByCol:
+
+给所有玩家发自定义色彩聊天框信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendNoticeMessageByCol(aStr, aFCol, aBCol)
+**说明：**
+    | aFCol, aBCol 分别为前景色和背景色 取值 0~65534
+**示例：**
+::
+
+    # 给所有玩家聊天框发送节日活动提示
+    PlayerList.SendNoticeMessageByCol('节日活动开始了！', 32767, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendTopMessage:
+
+给所有玩家发左上角信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendTopMessage(aStr)
+**说明：**
+    | 给所有玩家发左上角信息
+**示例：**
+::
+
+    # 给所有玩家左上角发送节日活动提示
+    PlayerList.SendTopMessage('节日活动开始了！')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SendCenterMessagebyMapID:
+
+给指定地图所有玩家发中间信息
+-----------------------------------
+**格式：**
+    | PlayerList.SendCenterMessagebyMapID(aStr, MapId)
+**说明：**
+    | 给在编号为MapId的地图的所有玩家发中间信息
+**示例：**
+::
+
+    # 给长城以南的所有玩家发中间节日活动提示
+    PlayerList.SendCenterMessagebyMapID('节日活动开始了！', 1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-GetUserPointerById:
+
+根据Id查找在线玩家
+-----------------------------------
+**格式：**
+    | PlayerList.GetUserPointerById(PlayId)
+**说明：**
+    | 返回两个值 找到的玩家的PlayP 是否找到
+**示例：**
+::
+
+    # 查找ID为50018的玩家
+    local FindP, BoFind = PlayerList.GetUserPointerById(50018)
+    if not BoFind then
+        -- 没有找到
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-GetUserPointer:
+
+根据名字查找在线玩家
+-----------------------------------
+**格式：**
+    | PlayerList.GetUserPointer(PlayName)
+**说明：**
+    | 返回两个值 找到的玩家的PlayP 是否找到
+    | 没有找到必须 return
+**示例：**
+::
+
+    # 查找名字为千年的玩家
+    local FindP, BoFind = PlayerList.GetUserPointer('千年')
+    if not BoFind then
+        -- 没有找到
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-GetRemainGuildUserbyServerID:
+
+获取某地图某门派玩家数量
+-----------------------------------
+**格式：**
+    | PlayerList.GetRemainGuildUserbyServerID(MapId, GuildName)
+**说明：**
+    | 返回数字 获取编号为MapID的地图某门派在线玩家数量
+**示例：**
+::
+
+    # 获取长城以南千年门派的在线玩家数量
+    local MemberNum = PlayerList.GetRemainGuildUserbyServerID(1, '千年')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-GetUserCountByManager:
+
+获取指定地图的玩家数量
+-----------------------------------
+**格式：**
+    | PlayerList.GetUserCountByManager(MapId)
+**说明：**
+    | 返回数字 获取编号为MapID的地图的在线玩家数量
+**示例：**
+::
+
+    # 获取长城以南的在线玩家数量
+    local PlayCount = PlayerList.GetUserCountByManager(1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-GuildSay:
+
+门派喊话广播
+-----------------------------------
+**格式：**
+    | PlayerList.GuildSay(GuildName, aStr)
+**说明：**
+    | 无返回 给指定门派的成员喊话
+**示例：**
+::
+
+    # 千年门派喊话通知成员更改团队
+    PlayerList.GuildSay('千年', '门派团队1398~~')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-DeleteItemAllUserbyMapIDMapId:
+
+删除地图所有玩家某物品
+-----------------------------------
+**格式：**
+    | PlayerList.DeleteItemAllUserbyMapIDMapId(MapId, SendName, ItemStr)
+**说明：**
+    | 删除编号为MapId的地图的所有玩家的某物品
+**示例：**
+::
+
+    # 删除长城以南所有玩家的七夕玫瑰
+    PlayerList.DeleteItemAllUserbyMapIDMapId(1, '活动结束', '七夕玫瑰:1')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _PlayerList-SayByServerID:
+
+同地图信息广播
+-----------------------------------
+**格式：**
+    | PlayerList.SayByServerID(MapId, aStr, iCol)
+**说明：**
+    | 给编号为MapId的地图的所有玩家喊话
+    | iCol为色彩索引 取值 0~15
+**示例：**
+::
+
+    # 给太极石棺洞内的玩家喊话
+    PlayerList.SayByServerID(31, '准备点火了~~', 2)
