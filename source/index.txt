@@ -11,3 +11,6 @@ tgs2011参考手册
     player.txt
     各类触发.txt
     函数Player.txt
+    函数PlayerList.txt
+    函数Manager.txt
+    函数其他.txt

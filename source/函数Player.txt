@@ -339,3 +339,769 @@ Player函数
 
     # 获取玩家攻击性武功
     local AckMagicName = Player.GetCurUseMagic(PlayP, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetPos:
+
+获取玩家当前坐标
+-----------------------------------
+**格式：**
+    | Player.GetPos(PlayP)
+**说明：**
+    | 返回两个参数 玩家坐标
+**示例：**
+::
+
+    # 获取玩家PlayP的坐标 x, y
+    local x, y = Player.GetPos(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetServerId:
+
+获取玩家地图Id
+-----------------------------------
+**格式：**
+    | Player.GetServerId(PlayP)
+**说明：**
+    | 返回玩家所在地图编号
+**示例：**
+::
+
+    # 获取玩家PlayP的地图Id
+    local MapId = Player.GetServerId(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetAddLifeData:
+
+获取玩家附加属性值
+-----------------------------------
+**格式：**
+    | Player.GetAddLifeData(PlayP, Index)
+**说明：**
+    | 获取玩家编号为Index的附加属性值 返回LifeData格式
+    | LifeData格式参考 :ref:`获取玩家本身属性值<Player-GetLifeData>`
+**示例：**
+::
+
+    # 获取玩家PlayP编号为1的附加属性
+    local LifeData = Player.GetAddLifeData(PlayP, 1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetAttrib:
+
+获取玩家基本属性
+-----------------------------------
+**格式：**
+    | Player.GetAttrib(PlayP)
+**说明：**
+    | 返回AttribData格式
+**示例：**
+::
+
+    # 获取玩家PlayP的基本属性
+    local AttribData = Player.GetAttrib(PlayP)
+
+    # AttribData格式如下
+    AttribData = {'Age'=0, 'InPower'=0, 'OutPower'=0, 'Magic'=0, 'Life'=0, Energy=0}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetCharId:
+
+获取玩家角色Id
+-----------------------------------
+**格式：**
+    | Player.GetCharId(PlayP)
+**说明：**
+    | 返回数字 玩家角色Id
+**示例：**
+::
+
+    # 获取玩家PlayP的角色Id
+    local CharId = Player.GetCharId(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetGuildName:
+
+获取玩家门派
+-----------------------------------
+**格式：**
+    | Player.GetGuildName(PlayP)
+**说明：**
+    | 返回门派名称字符串 有可能为空
+**示例：**
+::
+
+    # 获取玩家PlayP的门派名称
+    local GuildName = Player.GetGuildName(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetName:
+
+获取玩家名称
+-----------------------------------
+**格式：**
+    | Player.GetName(PlayP)
+**说明：**
+    | 返回字符串 玩家名称
+**示例：**
+::
+
+    # 获取玩家PlayP的玩家名称
+    local Name = Player.GetName(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetItemCountByName:
+
+获取玩家某物品数量
+-----------------------------------
+**格式：**
+    | Player.GetItemCountByName(PlayP, ItemName)
+**说明：**
+    | 返回数字 物品数量
+**示例：**
+::
+
+    # 获取玩家PlayP的生药数量
+    local ItemCount = Player.GetItemCountByName(PlayP, '生药')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetWearItemName:
+
+获取玩家某位置装备名称
+-----------------------------------
+**格式：**
+    | Player.GetWearItemName(PlayP, WearPos)
+**说明：**
+    | 返回穿戴位置装备名字 有可能为空
+    | WearPos穿戴位置 1护腕 2上衣 3鞋子 4内裤 6外套 7头发 8帽子 9武器
+**示例：**
+::
+
+    # 获取玩家PlayP的武器名称
+    local WeaponName = Player.GetWearItemName(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetAge:
+
+获取玩家年龄
+-----------------------------------
+**格式：**
+    | Player.GetAge(PlayP)
+**说明：**
+    | 返回数字 获取的年龄 100是1.00
+**示例：**
+::
+
+    # 获取玩家PlayP的年龄
+    local Age = Player.GetAge(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetSysopScope:
+
+获取玩家权限值
+-----------------------------------
+**格式：**
+    | Player.GetSysopScope(PlayP)
+**说明：**
+    | 返回数字 权限值 大于等于100就是GM
+**示例：**
+::
+
+    # 获取玩家PlayP的权限值
+    local Sysop = Player.GetSysopScope(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetItemExistence:
+
+获取玩家是否拥有某物品
+-----------------------------------
+**格式：**
+    | Player.GetItemExistence(PlayP, ItemStr)
+**说明：**
+    | 返回布尔值
+**示例：**
+::
+
+    # 获取玩家PlayP是否拥有1个金元
+    local BoHave = Player.GetItemExistence(PlayP, '金元:1')
+    if BoHave then
+        -- todo
+    else
+        Player.SendChatMsg(PlayP, '需要1个金元~', 2)
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetCurLife:
+
+获取当前血量
+-----------------------------------
+**格式：**
+    | Player.GetCurLife(PlayP)
+**说明：**
+    | 返回数字 当前血量 100是1.00
+**示例：**
+::
+
+    # 获取玩家PlayP的血量
+    local Life = Player.GetCurLife(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetAttribTotal:
+
+获取玩家属性总和
+-----------------------------------
+**格式：**
+    | Player.GetAttribTotal(PlayP)
+**说明：**
+    | 返回数字 属性总和 用于喊话等
+**示例：**
+::
+
+    # 获取玩家PlayP的属性总和
+    local AttribTotal = Player.GetAttribTotal(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetGroupKey:
+
+获取玩家团队
+-----------------------------------
+**格式：**
+    | Player.GetGroupKey(PlayP)
+**说明：**
+    | 返回数字 玩家团队100~9999
+**示例：**
+::
+
+    # 获取玩家PlayP的团队
+    local Group = Player.GetGroupKey(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetMagicSkillLevel:
+
+获取玩家武功等级
+-----------------------------------
+**格式：**
+    | Player.GetMagicSkillLevel(PlayP, MagicName)
+**说明：**
+    | 返回数字 武功等级 100是1.00
+**示例：**
+::
+
+    # 获取玩家PlayP的无影脚修炼等级
+    local Level = Player.GetMagicSkillLevel(PlayP, '无影脚')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetFreeSpace:
+
+获取玩家物品栏空位数
+-----------------------------------
+**格式：**
+    | Player.GetFreeSpace(PlayP)
+**说明：**
+    | 返回数字
+**示例：**
+::
+
+    # 获取玩家PlayP的物品栏空位数
+    local Space = Player.GetFreeSpace(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetItemPassWord:
+
+获取玩家物品密码
+-----------------------------------
+**格式：**
+    | Player.GetItemPassWord(PlayP)
+**说明：**
+    | 返回字符串
+**示例：**
+::
+
+    # 获取玩家PlayP的物品密码
+    local PswdStr = Player.GetItemPassWord(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetSex:
+
+获取玩家性别
+-----------------------------------
+**格式：**
+    | Player.GetSex(PlayP)
+**说明：**
+    | 返回数字 1男 2女
+**示例：**
+::
+
+    # 获取玩家PlayP的性别
+    local Sex = Player.GetSex(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetAccount:
+
+获取玩家帐号
+-----------------------------------
+**格式：**
+    | Player.GetAccount(PlayP)
+**说明：**
+    | 返回字符串
+**示例：**
+::
+
+    # 获取玩家PlayP的帐号
+    local Account = Player.GetAccount(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetARoundPlayName:
+
+获取玩家周围玩家名称
+-----------------------------------
+**格式：**
+    | Player.GetARoundPlayName(PlayP， aStr)
+**说明：**
+    | aStr格式是'%s' 支持多个%s 均会被替换成玩家名称
+**示例：**
+::
+
+    # 获取玩家PlayP的周围玩家名称
+    local Account = Player.GetARoundPlayName(PlayP, '%s,')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetEquipLevelByIndex:
+
+获取玩家装备强化等级
+-----------------------------------
+**格式：**
+    | Player.GetEquipLevelByIndex(PlayP, WearPos)
+**说明：**
+    | 返回数字 强化等级 没强化时返回0
+    | WearPos装备部位 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 获取玩家PlayP的武器强化等级
+    local Level = Player.GetEquipLevelByIndex(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetMaxLife:
+
+获取玩家最大血量
+-----------------------------------
+**格式：**
+    | Player.GetMaxLife(PlayP)
+**说明：**
+    | 返回数字 最大血量 100是1.00
+**示例：**
+::
+
+    # 获取玩家PlayP的最大血量
+    local MaxLife = Player.GetMaxLife(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetHaveItemInfoByPos:
+
+获取物品栏物品信息
+-----------------------------------
+**格式：**
+    | Player.GetHaveItemInfoByPos(PlayP, Index)
+**说明：**
+    | 返回ItemData格式 物品数据
+    | Index是物品栏位置 取值0~29
+**示例：**
+::
+
+    # 获取玩家PlayP的第一个格子的物品数据
+    local ItemData = Player.GetHaveItemInfoByPos(PlayP, 0)
+
+    ItemData = {Name='', Shape=0, Color=0, Count=0, Sex=0,
+    UpGrade=0, AddType=0, Kind=0, LockState=0, boNotExchange=true,
+    Attribute=1, GradeLevel=0, Grade=0, EquipSet=0}
+    # Grade段数 EquipSet黄字 GradeLevel强化等级
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetWearItemInfoByPos:
+
+获取装备栏物品信息
+-----------------------------------
+**格式：**
+    | Player.GetWearItemInfoByPos(PlayP, WearPos)
+**说明：**
+    | 返回ItemData格式 物品数据
+    | ItemData格式参考 :ref:`获取物品栏物品信息<Player-GetHaveItemInfoByPos>`
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 获取玩家PlayP的武器数据
+    local ItemData = Player.GetWearItemInfoByPos(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-GetEquipAttribByIndex:
+
+获取装备强化属性
+-----------------------------------
+**格式：**
+    | Player.GetEquipAttribByIndex(PlayP, WearPos)
+**说明：**
+    | 返回LifeData格式 物品数据
+    | LifeData格式参考 :ref:`获取玩家本身属性值<Player-GetLifeData>`
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 获取玩家PlayP的武器强化数据
+    local LifeData = Player.GetEquipAttribByIndex(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ChangeToMonster:
+
+将玩家变成为怪物
+-----------------------------------
+**格式：**
+    | Player.ChangeToMonster(PlayP, MopName)
+**说明：**
+    | 玩家死亡、跳地图等都会恢复原形
+**示例：**
+::
+
+    # 将玩家PlayP变身为北方魔人
+    Player.ChangeToMonster(PlayP, '北方魔人')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ClearEquipAttribByIndex:
+
+清除装备强化属性
+-----------------------------------
+**格式：**
+    | Player.ClearEquipAttribByIndex(PlayP, WearPos)
+**说明：**
+    | 返回LifeData格式 根据其中数据判断是否清除成功 一般都会成功
+    | LifeData格式参考 :ref:`获取玩家本身属性值<Player-GetLifeData>`
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 清除玩家Play的武器强化属性
+    local LifeData = Player.ClearEquipAttribByIndex(PlayP, 9)
+    if LifeData.DamageBody == 0 then
+        -- todo
+    else
+        Player.SendChatMsg(PlayP, '清除失败', 2)
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-RestoreToHuman:
+
+取消玩家变身
+-----------------------------------
+**格式：**
+    | Player.RestoreToHuman(PlayP)
+**说明：**
+    | 取消玩家变身 恢复原形
+**示例：**
+::
+
+    # 将玩家PlayP恢复原形
+    Player.RestoreToHuman(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelMagicByName:
+
+删除玩家某武功
+-----------------------------------
+**格式：**
+    | Player.DelMagicByName(PlayP, MagicName)
+**说明：**
+    | 删除武功 返回'0'失败 '1'成功 '-1'是有密码保护
+**示例：**
+::
+
+    # 将玩家PlayP的无影脚删除
+    local DelIndex = Player.DelMagicByName(PlayP, '无影脚')
+    if DelIndex ~= '1' then
+        Player.SendChatMsg(PlayP, '删除武功失败! 武功正在使用中或有密码保护~~')
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelMagicItem:
+
+删除玩家某物品
+-----------------------------------
+**格式：**
+    | Player.DelMagicItem(PlayP, ItemStr, SendName, Race)
+**说明：**
+    | 无返回 删除前需要自己判断武功是否存在
+**示例：**
+::
+
+    # 将玩家PlayP的1000钱币
+    Player.DelMagicItem(PlayP, '钱币:1000', '传送员', 4)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelAllItemByName:
+
+删除玩家某物品全部数量
+-----------------------------------
+**格式：**
+    | Player.DelAllItemByName(PlayP, ItemStr)
+**说明：**
+    | 返回布尔值 无需知道物品数量 全部删除
+**示例：**
+::
+
+    # 将玩家PlayP的全部八卦牌
+    local BoDel = Player.DelAllItemByName(PlayP, '八卦牌')
+    if BoDel then
+        -- todo
+    else
+        Player.SendChatMsg(PlayP, '删除失败~~')
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelWearItemByPos:
+
+删除装备栏某装备
+-----------------------------------
+**格式：**
+    | Player.DelWearItemByPos(PlayP, WearPos)
+**说明：**
+    | 无返回 直接生效
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 将玩家PlayP的武器删除
+    Player.DelWearItemByPos(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-DelWearItemByPos:
+
+删除装备栏某装备
+-----------------------------------
+**格式：**
+    | Player.DelWearItemByPos(PlayP, WearPos)
+**说明：**
+    | 无返回 直接生效
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+**示例：**
+::
+
+    # 将玩家PlayP的武器删除
+    Player.DelWearItemByPos(PlayP, 9)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SetAddLifeData:
+
+设定玩家附加属性值
+-----------------------------------
+**格式：**
+    | Player.SetAddLifeData(PlayP, Index, LifeData, iTick)
+**说明：**
+    | 根据Index设定玩家的附加属性值
+    | iTick是时间 单位是10毫秒 即100=1秒
+    | LifeData格式参考 :ref:`获取玩家本身属性值<Player-GetLifeData>`
+**示例：**
+::
+
+    # 设定玩家PlayP的编号为0的附加属性10秒
+    Player.SetAddLifeData(PlayP, 0, LifeData, 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SetAttrib:
+
+设定玩家基本属性
+-----------------------------------
+**格式：**
+    | Player.SetAttrib(PlayP, AttribTab)
+**说明：**
+    | 设定玩家的基本属性
+    | AttribTab格式参考 :ref:`获取玩家基本属性<Player-GetAttrib>`
+**示例：**
+::
+
+    # 设定玩家PlayP的基本属性
+    Player.SetAttrib(PlayP, AttribTab)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SetEquipAttribByIndex:
+
+设定玩家装备强化属性
+-----------------------------------
+**格式：**
+    | Player.SetEquipAttribByIndex(PlayP, WearPos, LifeData, NewLevel)
+**说明：**
+    | 设定玩家的装备强化属性
+    | WearPos是穿戴位置 参考 :ref:`获取玩家某位置装备名称<Player-GetWearItemName>`
+    | LifeData格式参考 :ref:`获取玩家本身属性值<Player-GetLifeData>`
+    | NewLevel是新的强化等级 Sql版本支持 如果不设定NewLevel则强化等级自动+1
+**示例：**
+::
+
+    # 设定玩家PlayP的武器的强化2级属性
+    Player.SetEquipAttribByIndex(PlayP, 9, LifeData, 2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-AddItemToBag:
+
+添加物品到玩家物品栏
+-----------------------------------
+**格式：**
+    | Player.AddItemToBag(PlayP, ItemData)
+**说明：**
+    | 返回布尔类型
+    | ItemData格式参考 :ref:`获取物品栏物品信息<Player-GetHaveItemInfoByPos>`
+**示例：**
+::
+
+    # 给玩家PlayP添加物品
+    local BoAdd = Player.AddItemToBag(PlayP, ItemData)
+    if BoAdd then
+        -- todo
+    else
+        Player.SendChatMsg(PlayP, '添加失败~~', 2)
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-AddItemToWear:
+
+添加物品到玩家装备栏
+-----------------------------------
+**格式：**
+    | Player.AddItemToWear(PlayP, ItemData, SendName, SendRace)
+**说明：**
+    | 返回布尔类型
+    | ItemData格式参考 :ref:`获取物品栏物品信息<Player-GetHaveItemInfoByPos>`
+**示例：**
+::
+
+    # 给玩家PlayP添加装备
+    local BoAdd = Player.AddItemToWear(PlayP, ItemData, '商城购买', 4)
+    if BoAdd then
+        -- todo
+    else
+        Player.SendChatMsg(PlayP, '添加失败~~', 2)
+        return
+    end
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ShowWindow:
+
+显示Npc菜单
+-----------------------------------
+**格式：**
+    | Player.ShowWindow(PlayP, NpcP, FileName, Index)
+**说明：**
+    | FileName是Help目录对应文件名
+    | Index 0或1 1带有图片显示且最多支持3条选项 推荐使用0
+**示例：**
+::
+
+    # 给玩家PlayP显示捕盗大将对话框
+    Player.ShowWindow(PlayP, NpcP, ".\\help\\捕盗大将.txt", 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ShowWindowByStr:
+
+显示Npc菜单使用字符串
+-----------------------------------
+**格式：**
+    | Player.ShowWindowByStr(PlayP, NpcP, ShowStr, Index)
+**说明：**
+    | ShowStr是格式化的字符串
+    | Index 0或1 1带有图片显示且最多支持3条选项 推荐使用0
+    |
+**示例：**
+::
+
+    local MainMenu =
+    [[<trade>
+    <title>船夫</title>
+    <text>
+    闯荡江湖之前建议您先加强自身属性.
+    </text>
+    <command send='close'>关闭
+    <body>
+    你身不在江湖，江湖已经拥有你的传说。
+    </body>
+    </trade>
+    ]]
+
+    # 给玩家PlayP显示MainMenu对话框
+    Player.ShowWindowByStr(PlayP, NpcP, MainMenu, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-ShowGuildMagicWindow:
+
+显示门派武功申请窗口
+-----------------------------------
+**格式：**
+    | Player.ShowGuildMagicWindow(PlayP)
+**说明：**
+    | 脚本给玩家显示门武申请窗口
+**示例：**
+::
+
+    # 给玩家PlayP显示门派武功申请窗口
+    Player.ShowGuildMagicWindow(PlayP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Player-SetViewName:
+
+修改显示名称
+-----------------------------------
+**格式：**
+    | Player.SetViewName(PlayP, ViewName)
+**说明：**
+    | 修改显示名称 比如蒙面人 对玩家本身名称并无影响
+**示例：**
+::
+
+    # 将玩家PlayP的显示名称修改为蒙面人
+    Player.SetViewName(PlayP, '蒙面人')
