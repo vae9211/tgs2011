@@ -1,0 +1,185 @@
+.. _BasicObj-func:
+
+============
+BasicObj方法
+============
+
+.. _BasicObj-FindObjectByName:
+
+查找周围某目标
+-----------------------------------
+**格式：**
+    | BasicObj.FindObjectByName(BaseP, FindName, Race)
+**说明：**
+    | 返回两个参数 BoFind, FindP 当FindP为nil时就是没有指针（不支持以FindP调用各种方法）
+    | Race是种族类型数字 参考 :ref:`获取指定目标种族<Manager-GetRaceByP>` Race为0时就是不区分种族
+**示例：**
+::
+
+    # 查找物件ObjP周围有没有名字叫千年爱好者的玩家
+    local BoFind, FindP = BasicObj.FindObjectByName(ObjP, '千年爱好者', 1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-BoPickbyMapName:
+
+指定的地图是否允许拾取物品
+-----------------------------------
+**格式：**
+    | BasicObj.BoPickbyMapName(BaseP, MapName, BoString)
+**说明：**
+    | BaseP限定为Npc或怪物 BoString取值 'true' 或 'false'
+**示例：**
+::
+
+    # 设定新手村禁止拾取物品
+    BasicObj.BoPickbyMapName(NpcP, '新手村', 'false')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-ChangeDynObjStateByTick:
+
+定时改变其他目标的状态
+-----------------------------------
+**格式：**
+    | BasicObj.ChangeDynObjStateByTick(BaseP, ObjName, NewState, iTick)
+**说明：**
+    | 动态目标(火盆之类)改变状态 iTick时间单位为10毫秒 即100=1秒
+    | BaseP限定为Npc或怪物
+**示例：**
+::
+
+    # 10秒后火炉熄灭
+    BasicObj.ChangeDynObjStateByTick(BaseP, '火炉', false, 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-MapAddObjByTick:
+
+定时添加目标到地图
+-----------------------------------
+**格式：**
+    | BasicObj.MapAddObjByTick(BaseP, ..., iTick)
+**说明：**
+    | ...为参数 用法与 :ref:`添加物件到地图<Manager-MapAddObjByName>` 相同
+    | BaseP限定为Npc或怪物 iTick时间单位为10毫秒
+**示例：**
+::
+
+    # 10秒后增加Npc老板娘
+    Manager.MapAddObjByTick(1, 'NPC', '老板娘', 500, 500, 10, 10020, '老板娘.sdb', 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-MapAddObjByTick:
+
+定时添加目标到地图
+-----------------------------------
+**格式：**
+    | BasicObj.MapAddObjByTick(BaseP, ..., iTick)
+**说明：**
+    | ... 为不定量的参数 用法与 :ref:`添加物件到地图<Manager-MapAddObjByName>` 相同
+    | BaseP限定为Npc或怪物 iTick时间单位为10毫秒
+**示例：**
+::
+
+    # 10秒后增加Npc老板娘
+    Manager.MapAddObjByTick(1, 'NPC', '老板娘', 500, 500, 10, 10020, '老板娘.sdb', 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-CommandIce:
+
+冻结目标
+-----------------------------------
+**格式：**
+    | BasicObj.CommandIce(BaseP, iTick)
+**说明：**
+    | 冻结BaseP iTick时间单位为10毫秒 解冻时间设定为0
+**示例：**
+::
+
+    # 将BaseP冻结10秒
+    BasicObj.CommandIce(BaseP, 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-CommandIceByName:
+
+冻结指定名称和种族的目标
+-----------------------------------
+**格式：**
+    | BasicObj.CommandIceByName(BaseP, ObjName, RaceStr, iTick)
+**说明：**
+    | BaseP限定为Npc或怪物 ObjName目标名称
+    | RaceStr目标种族字符串 'MONSTER', 'NPC', 'USER' iTick时间单位为10毫秒
+**示例：**
+::
+
+    # 将所有Npc老板娘冻结10秒
+    BasicObj.CommandIceByName(BaseP, '老板娘', 'NPC', 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-ChangeObjectName:
+
+改变目标名字
+-----------------------------------
+**格式：**
+    | BasicObj.ChangeObjectName(BaseP, ShowName)
+**说明：**
+    | 无返回 改变目标名字 真实和显示都改
+**示例：**
+::
+
+    # 将BaseP显示名字改为狂犬
+    BasicObj.ChangeObjectName(BaseP, '狂犬')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-SetGroupKey:
+
+改变目标团队
+-----------------------------------
+**格式：**
+    | BasicObj.SetGroupKey(BaseP, GroupKey)
+**说明：**
+    | BaseP限定为玩家和怪物 GroupKey团队 取值 100~9999
+**示例：**
+::
+
+    # 将BaseP的团队改为1398
+    BasicObj.SetGroupKey(BaseP, 1398)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-ChangeLife:
+
+改变目标血量
+-----------------------------------
+**格式：**
+    | BasicObj.ChangeLife(BaseP, Life)
+**说明：**
+    | BaseP限定为玩家和怪物 改变目标血量
+    | Life为正就是加血 为负就是扣血
+**示例：**
+::
+
+    # 将BaseP的血量减少
+    BasicObj.ChangeLife(BaseP, -100)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-SetAllowHitByTick:
+
+定时设定目标是否允许被攻击
+-----------------------------------
+**格式：**
+    | BasicObj.SetAllowHitByTick(BaseP, BoolStr, iTick)
+**说明：**
+    | BaseP限定怪物或Npc BoolStr布尔字符串 'true' 或 'false'
+**示例：**
+::
+
+    # 10秒后设定BaseP可以被攻击
+    BasicObj.SetAllowHitByTick(BaseP, 'true', 1000)

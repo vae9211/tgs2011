@@ -1,7 +1,7 @@
 ﻿.. _PlayerList-func:
 
 ============
-PlayerList函数
+PlayerList方法
 ============
 
 .. _PlayerList-MoveByServerId:

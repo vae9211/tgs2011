@@ -1,11 +1,11 @@
 .. _Player-func:
 
 ============
-Player函数
+Player方法
 ============
 
 .. attention ::
-    * Player函数是tgs2011封装的方法，区别于 :ref:`Player.lua<Player-lua>`
+    * Player方法是tgs2011封装的方法，区别于 :ref:`Player.lua<Player-lua>`
 
 .. _Player-MoveToServer:
 

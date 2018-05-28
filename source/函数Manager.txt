@@ -1,7 +1,7 @@
 ﻿.. _Manager-func:
 
 ============
-Manager函数
+Manager方法
 ============
 
 .. _Manager-GetExpByLevel:
@@ -223,5 +223,75 @@ Manager函数
 **示例：**
 ::
 
-    # 长城以南(500,500)增加刷新范围为3的攻城火王 绑定脚本10086 死亡不刷新
+    # 添加范围为3的攻城火王到长城以南(500,500) 绑定索引为10086的脚本 死亡不刷新
     Manager.AddMonsterToMap(1, '攻城火王', 500, 500, 3, 10086, false)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-CheckItemRegen:
+
+保持物品刷新数量
+-----------------------------------
+**格式：**
+    | Manager.CheckItemRegen(MapId, ObjName, X, Y, W, Count)
+**说明：**
+    | 指定地图 坐标 范围内 保持某物品固定数量
+**示例：**
+::
+
+    # 保持长城以南(500,500)范围为10的地图内有10000生药
+    Manager.CheckItemRegen(1, '生药', 500, 500, 10, 10000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-MapAddObjByName:
+
+添加物件到地图
+-----------------------------------
+**格式：**
+    | Manager.MapAddObjByName(MapId, RaceStr, ObjName, X, Y, Param1, Param2, Param3)
+**说明：**
+    | RaceStr是种族字符串 参考 :ref:`检查地图是否有目标依然有存在<Manager-CheckObjectAlive>`
+    | RaceStr是'MONSTER'时, Param1, Param2, Param3分别是 W刷新范围, ScriptIndex脚本索引, Boolean死亡刷新
+    | RaceStr是'NPC'时, Param1, Param2, Param3分别是 W刷新范围, ScriptIndex脚本索引, bookname绑定行为 (NpcSetting目录)
+    | RaceStr是'DYNAMICOBJECT'时, Param1是 ScriptIndex脚本索引 Param2, Param3无效
+**示例：**
+::
+
+    # 在长城以南(500,500)增加刷新范围为10的Npc老板娘 绑定索引为10020的脚本和'老板娘.sdb'文件
+    Manager.MapAddObjByName(1, 'NPC', '老板娘', 500, 500, 10, 10020, '老板娘.sdb')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-AddItemToMap:
+
+添加物品到地图
+-----------------------------------
+**格式：**
+    | Manager.AddItemToMap(MapId, ItemName, Grade, EquipSet, X, Y, W, Count)
+**说明：**
+    | 在指定 地图 坐标 范围 内添加指定 段数 金字 数量 的某物品
+**示例：**
+::
+
+    # 在长城以南(500,500)处添加刷新范围为3的一把4段20金字的天王刀
+    Manager.AddItemToMap(1, '天王刀', 4, 20, 500, 500, 3, 1)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _Manager-MoveByServerId:
+
+转移某地图玩家到另外地图
+-----------------------------------
+**格式：**
+    | Manager.MoveByServerId(MapId, TargetId, X, Y)
+**说明：**
+    | 使用方法与 :ref:`地图玩家整体传送<PlayerList-MoveByServerId>`相同
+**示例：**
+::
+
+    # 将地图49(一般为新人村)的所有玩家传送到长城以南(500,500)
+    Manager.MoveByServerId(49, 1, 500, 500)
+
+.. attention ::
+    * 大批量转移玩家 会造成服务器网络堵塞
