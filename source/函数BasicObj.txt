@@ -71,23 +71,6 @@ BasicObj方法
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _BasicObj-MapAddObjByTick:
-
-定时添加目标到地图
------------------------------------
-**格式：**
-    | BasicObj.MapAddObjByTick(BaseP, ..., iTick)
-**说明：**
-    | ... 为不定量的参数 用法与 :ref:`添加物件到地图<Manager-MapAddObjByName>` 相同
-    | BaseP限定为Npc或怪物 iTick时间单位为10毫秒
-**示例：**
-::
-
-    # 10秒后增加Npc老板娘
-    Manager.MapAddObjByTick(1, 'NPC', '老板娘', 500, 500, 10, 10020, '老板娘.sdb', 1000)
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. _BasicObj-CommandIce:
 
 冻结目标
@@ -170,9 +153,25 @@ BasicObj方法
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _BasicObj-SetAllowHitByTick:
+.. _BasicObj-ChangeDynObjState:
 
 定时设定目标是否允许被攻击
+-----------------------------------
+**格式：**
+    | BasicObj.ChangeDynObjState(BaseP, ObjName, Boolean);
+**说明：**
+    | 动态目标(火盆之类)改变状态
+**示例：**
+::
+
+    # 将火坛熄灭
+    BasicObj.ChangeDynObjState(BaseP, '火坛', false)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-SetAllowHitByTick:
+
+定时设定设定是否允许目标攻击
 -----------------------------------
 **格式：**
     | BasicObj.SetAllowHitByTick(BaseP, BoolStr, iTick)
@@ -181,5 +180,246 @@ BasicObj方法
 **示例：**
 ::
 
-    # 10秒后设定BaseP可以被攻击
+    # 10秒后设定BaseP可以攻击
     BasicObj.SetAllowHitByTick(BaseP, 'true', 1000)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-SetAllowHitByName:
+
+根据名字设定是否允许目标攻击
+-----------------------------------
+**格式：**
+    | BasicObj.SetAllowHitByName(BaseP, ObjName, RaceStr, BoolStr)
+**说明：**
+    | BaseP限定怪物或Npc BoolStr布尔字符串 'true' 或 'false'
+    | RaceStr种族字符串 'USER', 'MONSTER', 'NPC'
+**示例：**
+::
+
+    # 设定老板娘不可以攻击
+    BasicObj.SetAllowHitByName(BaseP, '老板娘', 'NPC', 'false')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-Say:
+
+怪物或NPC说话
+-----------------------------------
+**格式：**
+    | BasicObj.Say(BasicP, aStr, iTick)
+**说明：**
+    | BaseP限定怪物或Npc iTick说话间隔
+**示例：**
+::
+
+    # 老板娘无延迟说话
+    BasicObj.Say(BasicP, '南北奇货. 来瞧一瞧看一看啊...', 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GoToXY:
+
+怪物或NPC定时移动
+-----------------------------------
+**格式：**
+    | BasicObj.GoToXY(BasicP, X, Y, iTick)
+**说明：**
+    | BaseP限定怪物或Npc iTick间隔时间
+**示例：**
+::
+
+    # BasicP移动到(500,500)
+    BasicObj.GoToXY(BasicP, 500, 500, 0)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetLife:
+
+获取当前血量
+-----------------------------------
+**格式：**
+    | BasicObj.GetLife(BaseP)
+**说明：**
+    | 返回数字
+**示例：**
+::
+
+    # 获取BaseP的血量
+    local CurLife = BasicObj.GetLife(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetMoveableXY:
+
+获取能否移动到目标点
+-----------------------------------
+**格式：**
+    | BasicObj.GetMoveableXY(BaseP, X, Y)
+**说明：**
+    | 返回字符串 'true' 或 'false'
+**示例：**
+::
+
+    # 获取能否移动到(500,500)
+    local BoMove = BasicObj.GetMoveableXY(BaseP, 500, 500)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetMapName:
+
+获取地图名字
+-----------------------------------
+**格式：**
+    | BasicObj.GetMapName(BaseP)
+**说明：**
+    | 返回字符串 BaseP所在地图的名字
+**示例：**
+::
+
+    # 获取BaseP的所在地图名字
+    local MapName = BasicObj.GetMapName(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetServer:
+
+获取地图编号
+-----------------------------------
+**格式：**
+    | BasicObj.GetServer(BaseP)
+**说明：**
+    | 返回字符串 BaseP所在地图的编号
+**示例：**
+::
+
+    # 获取BaseP的所在地图编号
+    local MapId = BasicObj.GetServer(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetNearXY:
+
+获取目标附近坐标
+-----------------------------------
+**格式：**
+    | BasicObj.GetNearXY(BaseP, X, Y)
+**说明：**
+    | 返回两个数字 坐标X 坐标Y
+**示例：**
+::
+
+    # 获取BaseP的所在位置附近的坐标
+    local X, Y = BasicObj.GetNearXY(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetId:
+
+获取目标游戏ID
+-----------------------------------
+**格式：**
+    | BasicObj.GetId(BaseP)
+**说明：**
+    | 返回数字
+**示例：**
+::
+
+    # 获取BaseP的游戏ID
+    local ID = BasicObj.GetId(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetViewARoundObj:
+
+获取目标周围信息
+-----------------------------------
+**格式：**
+    | BasicObj.GetViewARoundObj(BaseP)
+**说明：**
+    | 返回表 结构 { [玩家名字] = PlayP, ... }
+**示例：**
+::
+
+    # 获取BaseP的周围信息
+    local Data = BasicObj.GetViewARoundObj(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetPosition:
+
+获取目标坐标
+-----------------------------------
+**格式：**
+    | BasicObj.GetPosition(BaseP)
+**说明：**
+    | 返回三个数字 地图编号 坐标X 坐标Y
+**示例：**
+::
+
+    # 获取BaseP的坐标
+    local MapId, X, Y = BasicObj.GetPosition(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetViewName:
+
+获取显示名字
+-----------------------------------
+**格式：**
+    | BasicObj.GetViewName(BaseP)
+**说明：**
+    | 获取显示名字 如果蒙面可能获取到的是蒙面人字符串
+**示例：**
+::
+
+    # 获取BaseP的显示名字
+    local ShowName = BasicObj.GetViewName(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetName:
+
+获取真实名字
+-----------------------------------
+**格式：**
+    | BasicObj.GetName(BaseP)
+**说明：**
+    | 获取真实名字 玩家蒙面时可用这个获取名字
+**示例：**
+::
+
+    # 获取BaseP的真实名字
+    local ShowName = BasicObj.GetName(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetRace:
+
+获取种族类别
+-----------------------------------
+**格式：**
+    | BasicObj.GetRace(BaseP)
+**说明：**
+    | 返回数字 1 玩家 3 怪物 4 NPC
+**示例：**
+::
+
+    # 获取BaseP的种族
+    local Race = BasicObj.GetRace(BaseP)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _BasicObj-GetMaxLife:
+
+获取最大血量
+-----------------------------------
+**格式：**
+    | BasicObj.GetMaxLife(P);
+**说明：**
+    | 返回数字
+**示例：**
+::
+
+    # 获取BaseP的最大血量
+    local MaxLife = BasicObj.GetMaxLife(BaseP)
